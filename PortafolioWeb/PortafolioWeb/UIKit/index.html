@@ -1,0 +1,694 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Simple UI Kit a Flat Bootstrap responsive Website Template | Home :: w3layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Simple UI Kit Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- css -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" 	href="css/font-awesome.min.css" type="text/css" media="all">
+<!--// css -->
+<!-- font -->
+<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!-- //font -->
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+</head>
+<body>
+	<div class="main-w3">
+		<h1>Simple UI Kit</h1>
+		<div class="col-md-12 top-menu">
+			<div class="top-nav">
+				<nav class="navbar navbar-default cl-effect-13"  id="cl-effect-13">
+
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						
+					</div>
+
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="hover-effect"><a href="#">Home</a></li>
+							<li class="hover-effect"><a href="#">About</a></li>
+							<li class="hover-effect"><a href="#">Gallery</a></li>
+							<li class="hover-effect"><a href="#">News</a></li>
+							<li class="hover-effect"><a href="#">Contact</a></li>
+						</ul>
+					</div>
+
+				</nav>		
+			</div>	
+			<div class="search">
+				<form action="#" method="post">
+					<input type="text" name="search" placeholder="Search here" required="">
+					<input type="submit" value="">
+				</form>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="col-md-4 left-w3l">
+			<div class="profile-w3layouts">
+				<div class="profile-top">
+					<div class="col-md-5 profile-top-left">
+						<img src="images/1.jpg" alt="" />
+					</div>
+					<div class="col-md-7 profile-top-right">
+						<h4>William Luther</h4>
+						<h5>Fashion Designer</h5>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="profile-ser">
+					<div class="profile-ser-grids">
+						<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+						<h4>1086</h4>
+					</div>
+					<div class="profile-ser-grids agileinfo">
+						<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+						<h4>1582</h4>
+					</div>
+					<div class="profile-ser-grids no-border">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						<h4>1468</h4>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<div id="map"></div>
+					<!-- Map-JavaScript -->
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>        
+			<script type="text/javascript">
+				google.maps.event.addDomListener(window, 'load', init);
+				function init() {
+					var mapOptions = {
+						zoom: 11,
+						center: new google.maps.LatLng(40.6700, -73.9400),
+						styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
+					};
+					var mapElement = document.getElementById('map');
+					var map = new google.maps.Map(mapElement, mapOptions);
+					var marker = new google.maps.Marker({
+						position: new google.maps.LatLng(40.6700, -73.9400),
+						map: map,
+					});
+				}
+			</script>
+		<!-- //Map-JavaScript -->
+
+			<div class="login-agile">
+				<div class="login-top">
+					<h4>Login Here</h4>
+				</div>
+				
+				<form action="#" method="post">
+					<div class="email">
+						<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+						<input type="text" name="email" class="user" placeholder="Email">
+					</div>
+					
+					<div class="pw">
+						<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+						<input type="password" name="password" class="pw" placeholder="password">
+					</div>
+					
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+			<div class="menu">
+				<div class="menu-top">
+					<h4>Menu Box</h4>
+				</div>
+				<div class="scrollbar" id="style-2">
+					<ul>
+						<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="#">Messages</a></li>
+						<li>19</li>
+					</ul>
+					<ul>
+						<li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><a href="#">Events</a></li>
+						<li>11</li>
+					</ul>
+					<ul>
+						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="#">Friends</a></li>
+						<li>58</li>
+					</ul>
+					<ul>
+						<li><span class="glyphicon glyphicon-send" aria-hidden="true"></span><a href="#">Invites</a></li>
+						<li>14</li>
+					</ul>
+					<ul>
+						<li><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><a href="#">Settings</a></li>
+						<li>14</li>
+					</ul>
+					<ul>
+						<li><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span><a href="#">Logout</a></li>
+						<li>14</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 middle-w3l">
+			<div class="subscribe-agileits-w3layouts">
+				<div class="sub-top">
+				<h4>Subscribe Here</h4>
+				</div>
+				<form action="#" method="post">
+					<div class="sub-email">
+						<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+					</div>
+					<input type="text" name="email" class="email" placeholder="Enter Email" >
+					<input type="submit" value="Subscribe">
+				</form>
+			</div>
+			<div class="skills"> 
+				<div class=" bar-grids">
+					<div class="skills-top">
+						<h4>Skills</h4>
+					</div>
+					<div class="skills-btm">
+						<h6>web design  <span> 80% </span></h6>
+						<div class="progress">
+							<div class="progress-bar progress-bar-striped active" style="width: 80%">
+							</div>
+						</div>
+						<h6>Leadership <span> 70% </span></h6>
+						<div class="progress  w3-agile">
+							<div class="progress-bar progress-bar-striped active" style="width: 70%">
+							</div>
+						</div>
+						<h6>Javascript<span>90% </span></h6>
+						<div class="progress  w3-agile">
+							<div class="progress-bar progress-bar-striped active" style="width: 90%">
+							</div>
+						</div>
+						<h6>Photoshop <span> 75% </span></h6>
+						<div class="progress  w3-agile progress-last">
+							<div class="progress-bar progress-bar-striped active" style="width: 75%">
+							</div>
+						</div>
+					</div> 
+				</div>	
+			</div>
+			<div class="cal1 cal_2 calendar"><div class="clndr"><div class="clndr-controls"><div class="clndr-control-button"><p class="clndr-previous-button">previous</p></div><div class="month">July 2015</div><div class="clndr-control-button rightalign"><p class="clndr-next-button">next</p></div></div><table class="clndr-table" border="0" cellspacing="0" cellpadding="0"><thead><tr class="header-days"><td class="header-day">S</td><td class="header-day">M</td><td class="header-day">T</td><td class="header-day">W</td><td class="header-day">T</td><td class="header-day">F</td><td class="header-day">S</td></tr></thead><tbody><tr><td class="day adjacent-month last-month calendar-day-2015-06-28"><div class="day-contents">28</div></td><td class="day adjacent-month last-month calendar-day-2015-06-29"><div class="day-contents">29</div></td><td class="day adjacent-month last-month calendar-day-2015-06-30"><div class="day-contents">30</div></td><td class="day calendar-day-2015-07-01"><div class="day-contents">1</div></td><td class="day calendar-day-2015-07-02"><div class="day-contents">2</div></td><td class="day calendar-day-2015-07-03"><div class="day-contents">3</div></td><td class="day calendar-day-2015-07-04"><div class="day-contents">4</div></td></tr><tr><td class="day calendar-day-2015-07-05"><div class="day-contents">5</div></td><td class="day calendar-day-2015-07-06"><div class="day-contents">6</div></td><td class="day calendar-day-2015-07-07"><div class="day-contents">7</div></td><td class="day calendar-day-2015-07-08"><div class="day-contents">8</div></td><td class="day calendar-day-2015-07-09"><div class="day-contents">9</div></td><td class="day calendar-day-2015-07-10"><div class="day-contents">10</div></td><td class="day calendar-day-2015-07-11"><div class="day-contents">11</div></td></tr><tr><td class="day calendar-day-2015-07-12"><div class="day-contents">12</div></td><td class="day calendar-day-2015-07-13"><div class="day-contents">13</div></td><td class="day calendar-day-2015-07-14"><div class="day-contents">14</div></td><td class="day calendar-day-2015-07-15"><div class="day-contents">15</div></td><td class="day calendar-day-2015-07-16"><div class="day-contents">16</div></td><td class="day calendar-day-2015-07-17"><div class="day-contents">17</div></td><td class="day calendar-day-2015-07-18"><div class="day-contents">18</div></td></tr><tr><td class="day calendar-day-2015-07-19"><div class="day-contents">19</div></td><td class="day calendar-day-2015-07-20"><div class="day-contents">20</div></td><td class="day calendar-day-2015-07-21"><div class="day-contents">21</div></td><td class="day calendar-day-2015-07-22"><div class="day-contents">22</div></td><td class="day calendar-day-2015-07-23"><div class="day-contents">23</div></td><td class="day calendar-day-2015-07-24"><div class="day-contents">24</div></td><td class="day calendar-day-2015-07-25"><div class="day-contents">25</div></td></tr><tr><td class="day calendar-day-2015-07-26"><div class="day-contents">26</div></td><td class="day calendar-day-2015-07-27"><div class="day-contents">27</div></td><td class="day calendar-day-2015-07-28"><div class="day-contents">28</div></td><td class="day calendar-day-2015-07-29"><div class="day-contents">29</div></td><td class="day calendar-day-2015-07-30"><div class="day-contents">30</div></td><td class="day calendar-day-2015-07-31"><div class="day-contents">31</div></td><td class="day adjacent-month next-month calendar-day-2015-08-01"><div class="day-contents">1</div></td></tr></tbody></table></div></div>
+			  
+			<link rel="stylesheet" href="css/clndr.css" type="text/css" />
+			
+			
+			<div class="flexible">
+				<div class="flex-top">
+					<h4>Flexible Lines</h4>
+				</div>
+				<div class="flex-bottom">
+				<div class="flex1">
+					<div class="alert-close"> </div>
+					<h5>Old is what's new</h5>
+				</div>
+				<div class="flex2">
+					<div class="alert-close1"> </div>
+					<h5>Work hard,Have fun</h5>
+				</div>
+				<div class="flex3">
+					<div class="alert-close2"> </div>
+					<h5>The best is yet to come</h5>
+				</div>
+				</div>
+			</div>
+			<script>$(document).ready(function(c) {
+			$('.alert-close').on('click', function(c){
+				$('.flex1').fadeOut('slow', function(c){
+					$('.flex1').remove();
+				});
+			});	  
+		});
+		</script>
+		<script>$(document).ready(function(c) {
+			$('.alert-close1').on('click', function(c){
+				$('.flex2').fadeOut('slow', function(c){
+					$('.flex2').remove();
+				});
+			});	  
+		});
+		</script>
+		<script>$(document).ready(function(c) {
+			$('.alert-close2').on('click', function(c){
+				$('.flex3').fadeOut('slow', function(c){
+					$('.flex3').remove();
+				});
+			});	  
+		});
+		</script>
+		</div>
+		<div class="col-md-4 right-w3l">
+			<div class="buttons-w3-agile">
+				<a href="#" class="hvr-rectangle-out">Rectangle Out</a>
+				<a href="#" class="hvr-shutter-in-horizontal">Shutter In Horizontal</a>	
+				<a href="#" class="hvr-radial-out">Radial Out</a>
+				<a href="#" class="hvr-bounce-to-left">Bounce To Left</a>
+				<a href="#" class="hvr-sweep-to-bottom">Sweep To Bottom</a>
+			</div>
+			<div class="weather-agileinfo">
+				<div class="weather-top">
+					<canvas id="cloudy" width="50" height="50"></canvas>
+					<h4>10°<span> Richmond,USA</span></h4>
+				</div>
+				<div class="weather-bottom">
+					<div class="weather-bottom-wthree">
+						<h4>SUN</h4>
+						 <canvas id="clear-day" width="30" height="30"></canvas>
+						<h4>12°</h4>
+					</div>
+					<div class="weather-bottom-wthree">
+						<h4>MON</h4>
+						<canvas id="fog" width="30" height="30"></canvas>
+						<h4>12°</h4>
+					</div>
+					<div class="weather-bottom-wthree">
+						<h4>TUE</h4>
+						 <canvas id="rain" width="30" height="30"></canvas>
+						<h4>12°</h4>
+					</div>
+					<div class="weather-bottom-wthree">
+						<h4>WED</h4>
+						<canvas id="snow" width="30" height="30"></canvas>
+						<h4>12°</h4>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<script>
+						var icons = new Skycons({"color": "#fff"}),
+							  list  = [
+								"partly-cloudy-day"
+							  ],
+							  i;
+
+						  for(i = list.length; i--; )
+							icons.set(list[i], list[i]);
+						  icons.play();
+					</script>
+					<script>
+						 var icons = new Skycons({"color": "#fff"}),
+							  list  = [
+								"clear-day","partly-cloudy-night","rain","fog","snow","cloudy"
+							  ],
+							  i;
+
+						  for(i = list.length; i--; )
+							icons.set(list[i], list[i]);
+						  icons.play();
+					</script>
+					<div class="content">
+						<div class="video_player">
+							<video controls="controls" poster="media/poster.jpg" style="width:100%;">
+								<source src="media/video.ogg" type="video/ogg" />
+								<source src="media/video.mp4" type="video/mp4" />
+								<source src="media/video.webm" type="video/webm" />
+							</video>
+							<div class="custom_controls">
+								<a class="play" title="Play"></a>
+								<a class="pause" title="Pause"></a>
+								<div class="time_slider"></div>
+								<div class="timer">00:00</div>
+								<div class="volume">
+									<div class="volume_slider"></div>
+									<a class="mute" title="Mute"></a>
+									<a class="unmute" title="Unmute"></a>
+								</div>
+							</div>
+						</div>
+
+						<script>
+							$(function() {
+								$('.video_player').myPlayer();
+							});
+						</script>
+					</div>
+					<div class="circular-chart">
+						<div class="circular-top">
+						<h4>Circular Chart</h4>
+						</div>
+						<div class="circular-btm">
+						<div id="container" class="margin" role="group"></div>
+						</div>
+					</div>
+				<script>
+$(window).load(function() {
+  doughnutWidget.options = {
+    container: $('#container'),
+    width: 100,
+    height: 100,
+    class: 'myClass',
+    cutout: 90
+  };
+
+  doughnutWidget.render(data());
+
+  setInterval(init, 2000);
+});
+
+function init() {
+  doughnutWidget.render(data());
+}
+
+function data() {
+    var data = {
+    pending: {
+      val: Math.round(Math.random() * 100),
+      color: 'rgb(252, 57, 85)',
+      click: function(e) {
+        console.log('hi');
+      }
+    },
+
+  };
+
+  return data;
+}
+</script>
+		</div>
+		<div class="clearfix"> </div>
+		<!-- start responsive tabs -->
+		<div class="col-md-7">
+			<div class="sap_tabs">	
+				<div id="horizontalTab">
+				  <ul class="resp-tabs-list">
+					  <li><span>About</span></li>
+					  <li><span>Team</span></li>
+					  <li><span>privacy</span></li>
+					  <li><span>Contact</span></li>			  
+				  </ul>				  	 
+					<div class="resp-tabs-container">
+						<div class="tab-1">
+						    <div class="facts">
+							<h3>About us</h3>
+				           <p>Quisque ut gravida nunc. Nunc rhoncus, sem vestibulum accumsan consectetur, augue purus rutrum mi, quis dictum erat velit id tellus. Proin sagittis nibh nec fringilla faucibus...</p>				              
+				           </div>
+				        </div>	
+						<div class="tab-2">
+							<div class="facts">
+								<h3>Our Team</h3>
+								<div class="col-md-6">
+									<div class="col-md-3 tab-img">
+										<img src="images/tab_pic1.jpg" alt=" " />
+									</div>
+									<div class="col-md-9 tab-text">
+										<h4>Martina</h4>
+										<h5>CEO And Founder</h5>
+										<p>Nunc ac risus sit amet dolor dictum fermentum a ac est. Ut porttitor sagittis tempus.</p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="col-md-6">
+									<div class="col-md-3 tab-img">
+										<img src="images/tab_pic2.jpg" alt=" " />
+										
+									</div>
+									<div class="col-md-9 tab-text">
+										<h4>Lisa Haydon</h4>
+										<h5>Managing Director</h5>
+										<p>Nunc ac risus sit amet dolor dictum fermentum a ac est. Ut porttitor sagittis tempus</p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>				        					 
+						<div class="tab-3">
+							<div class="facts">
+							<h3>Our Privacy</h3>
+							   <p>Resurgent economies, set of complex and intriguing challenges to businesses operating in this environment. Along with the impending outlook towards business expansion and growth, it is critical for companies to also have a strategic outlook towards resources (man, machine, material and money) utilization across functions and geographies.</p>				              
+							</div>	           	      
+				        </div>	
+				      <div class="tab-4">
+				      	 <div class="facts">
+							<div class="contact-form">
+								<form action="#" method="post">
+									<div>
+										<input name="userName" type="text" placeholder="Name"  class="textbox">
+									</div>
+									<div>
+										<input name="userEmail" type="text" placeholder="E-mail" class="textbox">
+									</div>
+									<div>
+										<textarea name="userMsg" placeholder="Subject"> </textarea>
+									</div>
+									<div>
+										<span><input type="submit" value="Send Us"></span>
+									</div>
+								</form>
+							</div>
+				         </div> 			              				             
+				      </div>	
+		        </div>
+	        </div>
+		    <script type="text/javascript">
+			    $(document).ready(function () {
+			        $('#horizontalTab').easyResponsiveTabs({
+			            type: 'default', //Types: default, vertical, accordion           
+			            width: 'auto', //auto or any width like 600px
+			            fit: true   // 100% fit in a container
+			        });
+			    });
+			   </script>	
+      		 </div>	
+		</div>
+		<div class="col-md-5 switch-w3">
+			<div class="toggle">
+				<div class="toggle-top">
+					<h4>Switches</h4>
+				</div>
+				<div class="toggle-btm">
+				<div class="switech-grid">
+				   <div class="demo5">
+					  <div class="switch demo3">
+						<input type="checkbox">
+						<label><i></i></label>
+					  </div>	
+					</div>  
+					<div class="demo6">									
+					  <div class="switch demo3">
+						<input type="checkbox" checked="">
+						<label><i></i></label>
+					  </div>			
+					</div>
+				</div>
+				<div class="switech-grid">
+				   <div class="demo5">
+					 <div class="switch demo7">
+						<input type="checkbox">
+						<label><i></i></label>
+					 </div>
+				   </div>	
+				   <div class="demo6 toogle2">									
+					  <div class="switch demo7">
+						<input type="checkbox" checked="">
+						<label><i></i></label>
+					  </div>	
+				   </div>		
+				</div>  
+				<div class="switech-grid btm-switch">
+				   <div class="demo5">
+					 <div class="switch demo4">
+						<input type="checkbox">
+						<label><i></i></label>
+					 </div>
+				   </div>	
+				   <div class="demo6">									
+					  <div class="switch demo4">
+						<input type="checkbox" checked="">
+						<label><i></i></label>
+					  </div>	
+				   </div>		
+				</div>  
+				<div class="clear"> </div>
+				</div>
+			</div>	
+		</div>
+		<div class="clearfix"></div>
+		<!-- end  switches -->
+		<div class="main-info">
+				<div class="form-left">
+					<h2>Checkout Form</h2>
+					<p>Select shipping method </p>
+					<!--radio-buttons-->
+					<div class="grid-radio">
+						<span class="radio-circle radio-left">
+							<input type="radio" id="radio01" name="radio" checked=""/>
+							<label for="radio01"><i></i>USPS Express Mail</label>
+						</span>
+						<span class="radio-circle">
+							<input type="radio" id="radio02" name="radio"/>
+							<label for="radio02"><i></i>FedEx</label>
+						</span>
+					</div>
+					<!--//radio-buttons-->
+					<a href="#" class="pay-pal"> Checkout with <span>PayPal</span></a>
+					<span class="middle-text">OR</span>
+				</div>
+				<div class="form-right">
+					<div class="top-text">
+						<h3>Total Price</h3>
+						<span class="price">$ 150</span>
+						<div class="clear"> </div>
+					</div>
+					<p>Shopping cart:2 products</p>
+					<div class="account">
+						<form action="#" method="post"> 
+							<input type="text" class="checkout name" placeholder="Name" name="name">
+							<input type="text" class="checkout month" placeholder="MM" maxlength="2" name="month">
+							<input type="text" class="checkout month" placeholder="YY" maxlength="4" name="year">
+							<input type="text" class="checkout pin" placeholder="4444 1111 3333 2222" maxlength="16" name="pin">
+							<input type="text" class="checkout month" placeholder="CVV" maxlength="3" name="cvv">
+							<input type="submit" value="Checkout with credit card">
+						</form>
+					</div>
+				</div>
+				<div class="clear"> </div>
+		</div>
+		<div class="acrdn">
+		<div class="acrdn-top">
+			<h4>Accordion</h4>
+		</div>
+			<!-- Accordion -->
+					<section class="ac-container agileits w3layouts">
+						<div>
+							<input id="ac-4" name="accordion-1" type="checkbox" />
+							<label for="ac-4" class="grid1"><i></i>Accordion Menu 1</label>
+							<article class="ac-small agileits w3layouts">
+								<ul>
+									<li><a href="#">Accordion 1 Sub Menu 1</a></li>
+									<li><a href="#">Accordion 1 Sub Menu 2</a></li>
+									<li><a href="#">Accordion 1 Sub Menu 3</a></li>
+									<li><a href="#">Accordion 1 Sub Menu 4</a></li>
+									<li><a href="#">Accordion 1 Sub Menu 5</a></li>
+								</ul>
+							</article>
+						</div>
+						<div>
+							<input id="ac-5" name="accordion-1" type="checkbox" />
+							<label for="ac-5" class="grid2"><i></i>Accordion Menu 2</label>
+							<article class="ac-small agileits w3layouts">
+								<ul>
+									<li><a href="#">Accordion 2 Sub Menu 1</a></li>
+									<li><a href="#">Accordion 2 Sub Menu 2</a></li>
+									<li><a href="#">Accordion 2 Sub Menu 3</a></li>
+									<li><a href="#">Accordion 2 Sub Menu 4</a></li>
+									<li><a href="#">Accordion 2 Sub Menu 5</a></li>
+								</ul>
+							</article>
+						</div>
+						<div>
+							<input id="ac-6" name="accordion-1" type="checkbox" />
+							<label for="ac-6" class="grid3"><i></i>Accordion Menu 3</label>
+							<article class="ac-small agileits w3layouts">
+								<ul>
+									<li><a href="#">Accordion 3 Sub Menu 1</a></li>
+									<li><a href="#">Accordion 3 Sub Menu 2</a></li>
+									<li><a href="#">Accordion 3 Sub Menu 3</a></li>
+									<li><a href="#">Accordion 3 Sub Menu 4</a></li>
+									<li><a href="#">Accordion 3 Sub Menu 5</a></li>
+								</ul>
+							</article>
+						</div>
+						<div>
+							<input id="ac-7" name="accordion-1" type="checkbox" />
+							<label for="ac-7" class="grid4"><i></i>Accordion Menu 4</label>
+							<article class="ac-small agileits w3layouts">
+								<ul>
+									<li><a href="#">Accordion 4 Sub Menu 1</a></li>
+									<li><a href="#">Accordion 4 Sub Menu 2</a></li>
+									<li><a href="#">Accordion 4 Sub Menu 3</a></li>
+									<li><a href="#">Accordion 4 Sub Menu 4</a></li>
+									<li><a href="#">Accordion 4 Sub Menu 5</a></li>
+								</ul>
+							</article>
+						</div>
+						<div>
+							<input id="ac-1" name="accordion-1" type="checkbox" />
+							<label for="ac-1" class="grid5"><i></i>Accordion Menu 5</label>
+							<article class="ac-small agileits w3layouts">
+								<ul>
+									<li><a href="#">Accordion 5 Sub Menu 1</a></li>
+									<li><a href="#">Accordion 5 Sub Menu 2</a></li>
+									<li><a href="#">Accordion 5 Sub Menu 3</a></li>
+									<li><a href="#">Accordion 5 Sub Menu 4</a></li>
+									<li><a href="#">Accordion 5 Sub Menu 5</a></li>
+								</ul>
+							</article>
+						</div>
+					</section>
+					<!-- //Accordion -->
+
+		</div>
+	<div class="clearfix"></div>
+		<div class="col-md-12 social-icons">
+			<a href="#"><div class="col-md-2 facebook">
+				<i class="fa fa-facebook" aria-hidden="true"></i>
+			</div></a>
+			<a href="#"><div class="col-md-2 yahoo">
+				<i class="fa fa-yahoo" aria-hidden="true"></i>
+			</div></a>
+			<a href="#"><div class="col-md-2 linkedin">
+				<i class="fa fa-linkedin" aria-hidden="true"></i>
+			</div></a>
+			<a href="#"><div class="col-md-2 google">
+				<i class="fa fa-google-plus" aria-hidden="true"></i>
+			</div></a>
+			<a href="#"><div class="col-md-2 pinterest">
+				<i class="fa fa-pinterest-p" aria-hidden="true"></i>
+			</div></a>
+			<a href="#"><div class="col-md-2 twitter">
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+			</div></a>
+			<a href="#"><div class="col-md-2 dribbble">
+				<i class="fa fa-dribbble" aria-hidden="true"></i>
+			</div></a>
+			<a href="#" ><div class="col-md-2 youtube ">
+				<i class="fa fa-youtube" aria-hidden="true"></i>
+			</div></a>
+			<a href="#"><div class="col-md-2 tumblr">
+				<i class="fa fa-tumblr" aria-hidden="true"></i>
+			</div></a>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="footer-agileits-w3layouts">
+			<p class="agileinfo"> &copy; 2017 Simple UI kit . All Rights Reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+		</div>
+	</div>
+	<!--  player js -->
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script>
+            google.load("jquery", "1.7.1");
+            google.load("jqueryui", "1.8.16");
+        </script>
+        <script src="js/script.js"></script>
+<!--  player js -->
+<script src="js/Chart.min.js"></script>
+<script src="js/pretty-doughtnut.js"></script>
+ <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+ <script src="js/skycons.js"></script>
+ <script src="js/underscore-min.js" type="text/javascript"></script>
+			<script src= "js/moment-2.2.1.js" type="text/javascript"></script>
+			<script src="js/clndr.js" type="text/javascript"></script>
+			<script src="js/site.js" type="text/javascript"></script>
+</body>
+</html>

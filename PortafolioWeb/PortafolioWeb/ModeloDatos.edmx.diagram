@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d4b3747151ab4b75affdf34469493b4d" Name="Diagram1">
+        <EntityTypeShape EntityType="Models.ESTADO" Width="2" PointX="4.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.FUNCIONARIO" Width="1.875" PointX="2.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.HISTORIAL_RESOLUCIONES" Width="2.125" PointX="4.875" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.MOTIVO" Width="1.875" PointX="4.875" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.ROL" Width="1.5" PointX="0.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.SOLICITUD" Width="1.875" PointX="7.375" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.TIPO_SOLICITUD" Width="1.875" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.UNIDAD" Width="1.875" PointX="0.5" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="Models.SOLICITUD_ESTADO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FUNCIONARIO_FUNCIONARIO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FUNCIONARIO_ROL_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.HISTORIAL_FUNCIONARIO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.SOLICITUD_FUNCIONARIO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.SOLICITUD_FUNCIONARIO_FKV2" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.MOTIVO_TIPO_SOLICITUD_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.ROL_UNIDAD_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.SOLICITUD_TIPO_SOLICITUD_FK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
