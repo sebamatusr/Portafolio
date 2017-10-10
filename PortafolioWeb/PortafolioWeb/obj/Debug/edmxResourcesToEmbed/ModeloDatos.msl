@@ -14,7 +14,6 @@
       <EntityTypeMapping TypeName="Models.FUNCIONARIO">
         <MappingFragment StoreEntitySet="FUNCIONARIO">
           <ScalarProperty Name="RUT" ColumnName="RUT" />
-          <ScalarProperty Name="RUT_EVALUADOR" ColumnName="RUT_EVALUADOR" />
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="APELLIDO_PATERNO" ColumnName="APELLIDO_PATERNO" />
           <ScalarProperty Name="APELLIDO_MATERNO" ColumnName="APELLIDO_MATERNO" />

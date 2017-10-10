@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Models.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Models.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ESTADO">
           <Key>
             <PropertyRef Name="ID_ESTADO" />
@@ -18,13 +18,12 @@
             <PropertyRef Name="RUT" />
           </Key>
           <Property Name="RUT" Type="varchar2" MaxLength="25" Nullable="false" />
-          <Property Name="RUT_EVALUADOR" Type="varchar2" MaxLength="25" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="APELLIDO_PATERNO" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="APELLIDO_MATERNO" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
           <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="PASSWORD" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="EMAIL" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="FECHA_CREACION" Type="timestamp" Precision="6" Nullable="false" />
           <Property Name="FECHA_MODIFICACION" Type="timestamp" Precision="6" Nullable="false" />
@@ -72,7 +71,7 @@
           <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_TIPOSOLICITUD" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="RUT_FUNCIONARIO" Type="varchar2" MaxLength="25" />
+          <Property Name="RUT_FUNCIONARIO" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="RUT_EVALUADOR" Type="varchar2" MaxLength="25" />
         </EntityType>
         <EntityType Name="TIPO_SOLICITUD">
@@ -94,18 +93,6 @@
           <Property Name="NOMBRE_UNIDAD" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
-        <Association Name="FUNCIONARIO_FUNCIONARIO_FK">
-          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
-          <End Role="FUNCIONARIO1" Type="Self.FUNCIONARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FUNCIONARIO">
-              <PropertyRef Name="RUT" />
-            </Principal>
-            <Dependent Role="FUNCIONARIO1">
-              <PropertyRef Name="RUT_EVALUADOR" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FUNCIONARIO_ROL_FK">
           <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -169,7 +156,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="SOLICITUD_FUNCIONARIO_FK">
-          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
           <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FUNCIONARIO">
@@ -205,18 +192,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelsStoreContainer">
-          <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="C##DUOC" store:Type="Tables" />
-          <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="C##DUOC" store:Type="Tables" />
-          <EntitySet Name="HISTORIAL_RESOLUCIONES" EntityType="Self.HISTORIAL_RESOLUCIONES" Schema="C##DUOC" store:Type="Tables" />
-          <EntitySet Name="MOTIVO" EntityType="Self.MOTIVO" Schema="C##DUOC" store:Type="Tables" />
-          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="C##DUOC" store:Type="Tables" />
-          <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" Schema="C##DUOC" store:Type="Tables" />
-          <EntitySet Name="TIPO_SOLICITUD" EntityType="Self.TIPO_SOLICITUD" Schema="C##DUOC" store:Type="Tables" />
-          <EntitySet Name="UNIDAD" EntityType="Self.UNIDAD" Schema="C##DUOC" store:Type="Tables" />
-          <AssociationSet Name="FUNCIONARIO_FUNCIONARIO_FK" Association="Self.FUNCIONARIO_FUNCIONARIO_FK">
-            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
-            <End Role="FUNCIONARIO1" EntitySet="FUNCIONARIO" />
-          </AssociationSet>
+          <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="VISTAHERMOSA" store:Type="Tables" />
+          <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="VISTAHERMOSA" store:Type="Tables" />
+          <EntitySet Name="HISTORIAL_RESOLUCIONES" EntityType="Self.HISTORIAL_RESOLUCIONES" Schema="VISTAHERMOSA" store:Type="Tables" />
+          <EntitySet Name="MOTIVO" EntityType="Self.MOTIVO" Schema="VISTAHERMOSA" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="VISTAHERMOSA" store:Type="Tables" />
+          <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" Schema="VISTAHERMOSA" store:Type="Tables" />
+          <EntitySet Name="TIPO_SOLICITUD" EntityType="Self.TIPO_SOLICITUD" Schema="VISTAHERMOSA" store:Type="Tables" />
+          <EntitySet Name="UNIDAD" EntityType="Self.UNIDAD" Schema="VISTAHERMOSA" store:Type="Tables" />
           <AssociationSet Name="FUNCIONARIO_ROL_FK" Association="Self.FUNCIONARIO_ROL_FK">
             <End Role="ROL" EntitySet="ROL" />
             <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
@@ -269,21 +252,18 @@
             <PropertyRef Name="RUT" />
           </Key>
           <Property Name="RUT" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RUT_EVALUADOR" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="NOMBRE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="APELLIDO_PATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="APELLIDO_MATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TELEFONO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EMAIL" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FECHA_CREACION" Type="DateTime" Precision="6" Nullable="false" />
           <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="6" Nullable="false" />
           <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_UNIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <NavigationProperty Name="FUNCIONARIO1" Relationship="Self.FUNCIONARIO_FUNCIONARIO_FK" FromRole="FUNCIONARIO" ToRole="FUNCIONARIO1" />
-          <NavigationProperty Name="FUNCIONARIO2" Relationship="Self.FUNCIONARIO_FUNCIONARIO_FK" FromRole="FUNCIONARIO1" ToRole="FUNCIONARIO" />
           <NavigationProperty Name="ROL" Relationship="Self.FUNCIONARIO_ROL_FK" FromRole="FUNCIONARIO" ToRole="ROL" />
           <NavigationProperty Name="HISTORIAL_RESOLUCIONES" Relationship="Self.HISTORIAL_FUNCIONARIO_FK" FromRole="FUNCIONARIO" ToRole="HISTORIAL_RESOLUCIONES" />
           <NavigationProperty Name="SOLICITUD" Relationship="Self.SOLICITUD_FUNCIONARIO_FK" FromRole="FUNCIONARIO" ToRole="SOLICITUD" />
@@ -333,7 +313,7 @@
           <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_TIPOSOLICITUD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="RUT_FUNCIONARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="RUT_FUNCIONARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RUT_EVALUADOR" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ESTADO1" Relationship="Self.SOLICITUD_ESTADO_FK" FromRole="SOLICITUD" ToRole="ESTADO" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.SOLICITUD_FUNCIONARIO_FK" FromRole="SOLICITUD" ToRole="FUNCIONARIO" />
@@ -374,18 +354,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FUNCIONARIO_FUNCIONARIO_FK">
-          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
-          <End Role="FUNCIONARIO1" Type="Self.FUNCIONARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FUNCIONARIO">
-              <PropertyRef Name="RUT" />
-            </Principal>
-            <Dependent Role="FUNCIONARIO1">
-              <PropertyRef Name="RUT_EVALUADOR" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FUNCIONARIO_ROL_FK">
           <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -413,7 +381,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="SOLICITUD_FUNCIONARIO_FK">
-          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
           <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FUNCIONARIO">
@@ -485,10 +453,6 @@
             <End Role="ESTADO" EntitySet="ESTADO" />
             <End Role="SOLICITUD" EntitySet="SOLICITUD" />
           </AssociationSet>
-          <AssociationSet Name="FUNCIONARIO_FUNCIONARIO_FK" Association="Self.FUNCIONARIO_FUNCIONARIO_FK">
-            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
-            <End Role="FUNCIONARIO1" EntitySet="FUNCIONARIO" />
-          </AssociationSet>
           <AssociationSet Name="FUNCIONARIO_ROL_FK" Association="Self.FUNCIONARIO_ROL_FK">
             <End Role="ROL" EntitySet="ROL" />
             <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
@@ -537,7 +501,6 @@
             <EntityTypeMapping TypeName="Models.FUNCIONARIO">
               <MappingFragment StoreEntitySet="FUNCIONARIO">
                 <ScalarProperty Name="RUT" ColumnName="RUT" />
-                <ScalarProperty Name="RUT_EVALUADOR" ColumnName="RUT_EVALUADOR" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="APELLIDO_PATERNO" ColumnName="APELLIDO_PATERNO" />
                 <ScalarProperty Name="APELLIDO_MATERNO" ColumnName="APELLIDO_MATERNO" />

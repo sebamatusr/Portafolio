@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Models.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Models.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="ESTADO">
     <Key>
       <PropertyRef Name="ID_ESTADO" />
@@ -13,13 +13,12 @@
       <PropertyRef Name="RUT" />
     </Key>
     <Property Name="RUT" Type="varchar2" MaxLength="25" Nullable="false" />
-    <Property Name="RUT_EVALUADOR" Type="varchar2" MaxLength="25" />
     <Property Name="NOMBRE" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="APELLIDO_PATERNO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="APELLIDO_MATERNO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PASSWORD" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="PASSWORD" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="EMAIL" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="FECHA_CREACION" Type="timestamp" Precision="6" Nullable="false" />
     <Property Name="FECHA_MODIFICACION" Type="timestamp" Precision="6" Nullable="false" />
@@ -67,7 +66,7 @@
     <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ID_TIPOSOLICITUD" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ID_ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="RUT_FUNCIONARIO" Type="varchar2" MaxLength="25" />
+    <Property Name="RUT_FUNCIONARIO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="RUT_EVALUADOR" Type="varchar2" MaxLength="25" />
   </EntityType>
   <EntityType Name="TIPO_SOLICITUD">
@@ -89,18 +88,6 @@
     <Property Name="NOMBRE_UNIDAD" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
   </EntityType>
-  <Association Name="FUNCIONARIO_FUNCIONARIO_FK">
-    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
-    <End Role="FUNCIONARIO1" Type="Self.FUNCIONARIO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="FUNCIONARIO">
-        <PropertyRef Name="RUT" />
-      </Principal>
-      <Dependent Role="FUNCIONARIO1">
-        <PropertyRef Name="RUT_EVALUADOR" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FUNCIONARIO_ROL_FK">
     <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
     <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -164,7 +151,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="SOLICITUD_FUNCIONARIO_FK">
-    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
     <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FUNCIONARIO">
@@ -200,18 +187,14 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ModelsStoreContainer">
-    <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="C##DUOC" store:Type="Tables" />
-    <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="C##DUOC" store:Type="Tables" />
-    <EntitySet Name="HISTORIAL_RESOLUCIONES" EntityType="Self.HISTORIAL_RESOLUCIONES" Schema="C##DUOC" store:Type="Tables" />
-    <EntitySet Name="MOTIVO" EntityType="Self.MOTIVO" Schema="C##DUOC" store:Type="Tables" />
-    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="C##DUOC" store:Type="Tables" />
-    <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" Schema="C##DUOC" store:Type="Tables" />
-    <EntitySet Name="TIPO_SOLICITUD" EntityType="Self.TIPO_SOLICITUD" Schema="C##DUOC" store:Type="Tables" />
-    <EntitySet Name="UNIDAD" EntityType="Self.UNIDAD" Schema="C##DUOC" store:Type="Tables" />
-    <AssociationSet Name="FUNCIONARIO_FUNCIONARIO_FK" Association="Self.FUNCIONARIO_FUNCIONARIO_FK">
-      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
-      <End Role="FUNCIONARIO1" EntitySet="FUNCIONARIO" />
-    </AssociationSet>
+    <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="VISTAHERMOSA" store:Type="Tables" />
+    <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="VISTAHERMOSA" store:Type="Tables" />
+    <EntitySet Name="HISTORIAL_RESOLUCIONES" EntityType="Self.HISTORIAL_RESOLUCIONES" Schema="VISTAHERMOSA" store:Type="Tables" />
+    <EntitySet Name="MOTIVO" EntityType="Self.MOTIVO" Schema="VISTAHERMOSA" store:Type="Tables" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="VISTAHERMOSA" store:Type="Tables" />
+    <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" Schema="VISTAHERMOSA" store:Type="Tables" />
+    <EntitySet Name="TIPO_SOLICITUD" EntityType="Self.TIPO_SOLICITUD" Schema="VISTAHERMOSA" store:Type="Tables" />
+    <EntitySet Name="UNIDAD" EntityType="Self.UNIDAD" Schema="VISTAHERMOSA" store:Type="Tables" />
     <AssociationSet Name="FUNCIONARIO_ROL_FK" Association="Self.FUNCIONARIO_ROL_FK">
       <End Role="ROL" EntitySet="ROL" />
       <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />

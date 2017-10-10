@@ -14,21 +14,18 @@
       <PropertyRef Name="RUT" />
     </Key>
     <Property Name="RUT" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="RUT_EVALUADOR" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="NOMBRE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="APELLIDO_PATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="APELLIDO_MATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="TELEFONO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="EMAIL" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="FECHA_CREACION" Type="DateTime" Precision="6" Nullable="false" />
     <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="6" Nullable="false" />
     <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ID_UNIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="FUNCIONARIO1" Relationship="Self.FUNCIONARIO_FUNCIONARIO_FK" FromRole="FUNCIONARIO" ToRole="FUNCIONARIO1" />
-    <NavigationProperty Name="FUNCIONARIO2" Relationship="Self.FUNCIONARIO_FUNCIONARIO_FK" FromRole="FUNCIONARIO1" ToRole="FUNCIONARIO" />
     <NavigationProperty Name="ROL" Relationship="Self.FUNCIONARIO_ROL_FK" FromRole="FUNCIONARIO" ToRole="ROL" />
     <NavigationProperty Name="HISTORIAL_RESOLUCIONES" Relationship="Self.HISTORIAL_FUNCIONARIO_FK" FromRole="FUNCIONARIO" ToRole="HISTORIAL_RESOLUCIONES" />
     <NavigationProperty Name="SOLICITUD" Relationship="Self.SOLICITUD_FUNCIONARIO_FK" FromRole="FUNCIONARIO" ToRole="SOLICITUD" />
@@ -78,7 +75,7 @@
     <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ID_TIPOSOLICITUD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ID_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="RUT_FUNCIONARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="RUT_FUNCIONARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RUT_EVALUADOR" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="ESTADO1" Relationship="Self.SOLICITUD_ESTADO_FK" FromRole="SOLICITUD" ToRole="ESTADO" />
     <NavigationProperty Name="FUNCIONARIO" Relationship="Self.SOLICITUD_FUNCIONARIO_FK" FromRole="SOLICITUD" ToRole="FUNCIONARIO" />
@@ -119,18 +116,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FUNCIONARIO_FUNCIONARIO_FK">
-    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
-    <End Role="FUNCIONARIO1" Type="Self.FUNCIONARIO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="FUNCIONARIO">
-        <PropertyRef Name="RUT" />
-      </Principal>
-      <Dependent Role="FUNCIONARIO1">
-        <PropertyRef Name="RUT_EVALUADOR" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FUNCIONARIO_ROL_FK">
     <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
     <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -158,7 +143,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="SOLICITUD_FUNCIONARIO_FK">
-    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
     <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FUNCIONARIO">
@@ -229,10 +214,6 @@
     <AssociationSet Name="SOLICITUD_ESTADO_FK" Association="Self.SOLICITUD_ESTADO_FK">
       <End Role="ESTADO" EntitySet="ESTADO" />
       <End Role="SOLICITUD" EntitySet="SOLICITUD" />
-    </AssociationSet>
-    <AssociationSet Name="FUNCIONARIO_FUNCIONARIO_FK" Association="Self.FUNCIONARIO_FUNCIONARIO_FK">
-      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
-      <End Role="FUNCIONARIO1" EntitySet="FUNCIONARIO" />
     </AssociationSet>
     <AssociationSet Name="FUNCIONARIO_ROL_FK" Association="Self.FUNCIONARIO_ROL_FK">
       <End Role="ROL" EntitySet="ROL" />

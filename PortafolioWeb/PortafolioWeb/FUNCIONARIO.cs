@@ -17,14 +17,12 @@ namespace PortafolioWeb
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FUNCIONARIO()
         {
-            this.FUNCIONARIO1 = new HashSet<FUNCIONARIO>();
             this.HISTORIAL_RESOLUCIONES = new HashSet<HISTORIAL_RESOLUCIONES>();
             this.SOLICITUD = new HashSet<SOLICITUD>();
             this.SOLICITUD1 = new HashSet<SOLICITUD>();
         }
     
         public string RUT { get; set; }
-        public string RUT_EVALUADOR { get; set; }
         public string NOMBRE { get; set; }
         public string APELLIDO_PATERNO { get; set; }
         public string APELLIDO_MATERNO { get; set; }
@@ -38,9 +36,6 @@ namespace PortafolioWeb
         public decimal ID_ROL { get; set; }
         public decimal ID_UNIDAD { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FUNCIONARIO> FUNCIONARIO1 { get; set; }
-        public virtual FUNCIONARIO FUNCIONARIO2 { get; set; }
         public virtual ROL ROL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIAL_RESOLUCIONES> HISTORIAL_RESOLUCIONES { get; set; }
