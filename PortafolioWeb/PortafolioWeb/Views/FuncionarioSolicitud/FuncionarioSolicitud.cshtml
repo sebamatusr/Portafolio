@@ -10,7 +10,7 @@
             <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active">@Html.ActionLink("Inicio", "Index", "Home")</li>
+            <li class="active">@Html.ActionLink("Inicio", "Index", "FuncionarioSolicitud")</li>
             <li class="active">@Html.ActionLink("Solicitar Permiso", "FuncionarioSolicitud", "FuncionarioSolicitud")</li>
             <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisos", "FuncionarioSolicitud")</li>
         </ul>
@@ -19,5 +19,75 @@
         </ul>
     </div>
 </nav>
+<br/>
+<div class="container">
+
+    <form class="well form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Solicitud de Permiso</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Seleccione Tipo</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select name="state" class="form-control selectpicker">
+                            <option>-Seleccione-</option>
+                            <option>aaaaaaa</option>
+                            <option>aaaaaaa</option>
+                            <option>aaaaaaa</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Seleccione Motivo</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select name="state" class="form-control selectpicker">
+                            <option>-Seleccione-</option>
+                            <option>aaaaaaa</option>
+                            <option>aaaaaaa</option>
+                            <option>aaaaaaa</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Cantidad dias</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input class="form-control" name="comment" placeholder="Ingrese cantidad dias"></input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Descripción</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <textarea class="form-control" name="comment" placeholder="Ingrese descripción"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4" align="center">
+                    <button type="button" id="boton" class="btn btn-primary btn-sm">Registrar</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
 
 

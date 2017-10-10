@@ -3,27 +3,71 @@
     ViewBag.Title = "ConsultarPermisos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Atrás", "Index", "Home")</li>
-                <li>@Html.ActionLink("Generar Resoluciones", "GenerarResoluciones", "Login")</li>
-                <li>@Html.ActionLink("Consultar Permisos", "ConsultarPermisos", "Login")</li>
-                <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
-            </ul>
-        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Solicitar Permiso", "FuncionarioSolicitud", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisos", "FuncionarioSolicitud")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
     </div>
+</nav>
+<br/>
+<div class="container">
+
+    <form class="well form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Consulta de Permiso</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Rut Empleado</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <input class="form-control" name="comment" placeholder="Ingrese Rut"></input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4" align="center">
+                    <button type="button" id="boton" class="btn btn-primary btn-sm">Consultar</button>
+                </div>
+            </div>
+            <br />
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>N° permiso</th>
+                            <th>Estado</th>
+                            <th>Fecha Solicitud</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Anna</td>
+                            <td>Pitt</td>
+                            <td><button type="button">Ver permiso</button> <button type="button">Descargar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+        </fieldset>
+    </form>
 </div>
 
-<h2>Consultar Permisos Por Empleado</h2>
 <div class="form-group">
     @Html.LabelFor(model => model.RUT, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
