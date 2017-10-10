@@ -21,6 +21,14 @@ namespace PortafolioWeb.Controllers
             }
             return View();
         }
+        public ActionResult FuncionarioSolicitud()
+        {
+            if (!Session["rol_name"].Equals("Funcionario"))
+            {
+                return RedirectToAction("Index", "LoginController");
+            }
+            return View();
+        }
         public ActionResult ConsultarPermisos()
         {
             if (!Session["rol_name"].Equals("Funcionario"))
