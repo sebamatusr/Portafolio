@@ -4,31 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Atrás", "Index", "Home")</li>
-                <li>@Html.ActionLink("Solicitar Permiso", "SolicitarPermiso", "FuncionarioSolicitud")</li>
-                <li>@Html.ActionLink("Consultar Permisos", "PermisosSelf", "Login")</li>
-                <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
-            </ul>
-        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "Home")</li>
+            <li class="active">@Html.ActionLink("Solicitar Permiso", "FuncionarioSolicitud", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisos", "FuncionarioSolicitud")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
     </div>
-</div>
+</nav>
 
 
-
-
-<h2>Funcionario</h2>
-
-<h2>Bienvenido @Session["nombre"].ToString()</h2>
-<h3>@Session["rol_name"].ToString()</h3>
-<h4>Unidad: @Session["unidad"].ToString()</h4>
