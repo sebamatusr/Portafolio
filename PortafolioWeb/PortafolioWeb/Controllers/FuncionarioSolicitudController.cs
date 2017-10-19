@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PortafolioWeb;
 using System.Data;
+using PortafolioWeb.Models;
 
 namespace PortafolioWeb.Controllers
 {
@@ -27,8 +28,33 @@ namespace PortafolioWeb.Controllers
             {
                 return RedirectToAction("Index", "LoginController");
             }
-            return View();
+
+            SolicitudViewModel model = new SolicitudViewModel();
+
+            model.Solicitudes = db.SOLICITUD.ToList();
+            model.Tipos_Solicitud = db.TIPO_SOLICITUD.ToList();
+            model.Motivos = db.MOTIVO.ToList();
+
+
+            return View(model);
         }
+        public ActionResult GetMotivos(int id_tiposolicitud)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            var motivos = db.MOTIVO.Where(c => c.ID_TIPOSOLICITUD == id_tiposolicitud).ToList();
+
+            return Json(motivos, JsonRequestBehavior.AllowGet);
+        }
+        //public ActionResult GetPermisos(int id_tiposolicitud)
+        //{
+        //    db.Configuration.LazyLoadingEnabled = false;
+        //    var solicitudes = db.SOLICITUD.Where(c => c.ID_ESTADO == 2 && c.RUT_FUNCIONARIO.Equals(Session["rut"]) && c.ID_TIPOSOLICITUD == id_tiposolicitud).ToList();
+
+            
+
+        //    return Json(diasdiponibles, JsonRequestBehavior.AllowGet);
+
+        //}
         public ActionResult ConsultarPermisos()
         {
             if (!Session["rol_name"].Equals("Funcionario"))
@@ -51,12 +77,13 @@ namespace PortafolioWeb.Controllers
 
         // POST: FuncionarioSolicitud/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult FuncionarioSolicitud(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                var guid = System.Guid.NewGuid()
+                    ;
                 return RedirectToAction("Index");
             }
             catch

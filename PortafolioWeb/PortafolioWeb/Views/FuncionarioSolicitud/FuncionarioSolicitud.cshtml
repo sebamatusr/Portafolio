@@ -1,4 +1,4 @@
-﻿
+﻿@model PortafolioWeb.Models.SolicitudViewModel
 @{
     ViewBag.Title = "FuncionarioSolicitud";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -29,41 +29,42 @@
             <legend>Solicitud de Permiso</legend>
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Seleccione Tipo</label>
+                @Html.LabelFor(model => model.Tipos_Solicitud, "Tipo de solicitud", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 selectContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <select name="state" class="form-control selectpicker">
-                            <option>-Seleccione-</option>
-                            <option>aaaaaaa</option>
-                            <option>aaaaaaa</option>
-                            <option>aaaaaaa</option>
-                        </select>
+                        @Html.DropDownListFor(model => model.Tipos_Solicitud, new SelectList(Model.Tipos_Solicitud, "ID_TIPOSOLICITUD", "DESCRIPCION"), "- Por favor seleccione -", new {id = "TipoSolicitud", @class = "form-control selectpicker", @onchange="MostrarMotivos()"})
+                        @Html.ValidationMessageFor(model => model.Tipos_Solicitud,"",new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Seleccione Motivo</label>
+                @Html.LabelFor(model => model.Motivos, "Motivo de la solicitud", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 selectContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <select name="state" class="form-control selectpicker">
-                            <option>-Seleccione-</option>
-                            <option>aaaaaaa</option>
-                            <option>aaaaaaa</option>
-                            <option>aaaaaaa</option>
-                        </select>
+                        @Html.DropDownListFor(model => model.Motivos, new SelectList(Enumerable.Empty<SelectListItem>(), "ID_MOTIVO", "DESCRIPCION"), "- Por favor seleccione -", new {id = "Motivos", @class = "form-control selectpicker" })
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Cantidad dias</label>
+                @Html.LabelFor(model => model.solicitud.FECHA_INICIO, "Fecha de inicio del permiso", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input class="form-control" name="comment" placeholder="Ingrese cantidad dias"></input>
+                        @Html.TextBoxFor(model => model.solicitud.FECHA_INICIO, new {@placeholder = "Seleccione una fecha", @class = "form-control datepicker", @id = "datepicker" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Cantidad días de permiso</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input class="form-control" name="comment" placeholder="Ingrese cantidad de días" type="number">
                     </div>
                 </div>
             </div>
@@ -82,12 +83,40 @@
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4" align="center">
-                    <button type="button" id="boton" class="btn btn-primary btn-sm">Registrar</button>
+                    <button type="button" id="boton" class="btn btn-primary btn-sm">Ingresar solicitud</button>
                 </div>
             </div>
 
         </fieldset>
     </form>
 </div>
+@section Scripts {
+    <script>
 
+        $(document).ready(function () {
+            $(".datepicker").datepicker();
+        });
+
+      function MostrarMotivos() {
+        var id_tiposolicitud = $('#TipoSolicitud').val();
+        $.ajax({
+            url: '/FuncionarioSolicitud/GetMotivos',
+            type: "GET",
+            dataType: "JSON",
+            data: { id_tiposolicitud: id_tiposolicitud },
+            success: function (motivos) {
+                $("#Motivos").html(""); // clear before appending new list
+                $.each(motivos, function (i, motivo) {
+                    $("#Motivos").append(
+                        $('<option></option>').val(motivo.ID_MOTIVO).html(motivo.DESCRIPCION));
+                });
+            },
+            error: function()  
+            {  
+                alert("Algo salió mal.")  
+            },  
+        });
+      }
+    </script>
+}
 

@@ -96,5 +96,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ValidarLogin" FunctionName="Models.Store.LOGINWEB" />
+    <FunctionImportMapping FunctionImportName="LoginValidador" FunctionName="Models.Store.LOGINWEB" />
   </EntityContainerMapping>
 </Mapping>

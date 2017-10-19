@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34ddaa6198eb4fdbbe96845f458b2134" Name="Diagram1">
+      <Diagram DiagramId="34ddaa6198eb4fdbbe96845f458b2134" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="Models.ESTADO" Width="2" PointX="3.125" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.FUNCIONARIO" Width="2" PointX="5.875" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.HISTORIAL_RESOLUCIONES" Width="2" PointX="5.875" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.HISTORIAL_RESOLUCIONES" Width="2" PointX="8.75" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.MOTIVO" Width="1.875" PointX="0.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.ROL" Width="1.875" PointX="8.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.SOLICITUD" Width="2" PointX="3.125" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.TIPO_SOLICITUD" Width="1.875" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.UNIDAD" Width="1.875" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.UNIDAD" Width="1.875" PointX="11" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="Models.SOLICITUD_ESTADO_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FUNCIONARIO_ROL_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Models.HISTORIAL_FUNCIONARIO_FK" ManuallyRouted="false" />

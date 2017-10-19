@@ -18,7 +18,7 @@
     <Property Name="APELLIDO_MATERNO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="PASSWORD" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="PASSWORD" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="EMAIL" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="FECHA_CREACION" Type="timestamp" Precision="6" Nullable="false" />
     <Property Name="FECHA_MODIFICACION" Type="timestamp" Precision="6" Nullable="false" />
@@ -186,6 +186,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="LOGINWEB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="VISTAHERMOSA">
+    <Parameter Name="VRUT" Type="varchar2" Mode="In" />
+    <Parameter Name="VPASS" Type="varchar2" Mode="In" />
+    <Parameter Name="VSALIDA" Type="number" Mode="Out" />
+  </Function>
+  <Function Name="VALID_USER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="VISTAHERMOSA" ReturnType="number">
+    <Parameter Name="P_USERNAME" Type="varchar2" Mode="In" />
+    <Parameter Name="P_PASSWORD" Type="varchar2" Mode="In" />
+  </Function>
   <EntityContainer Name="ModelsStoreContainer">
     <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="VISTAHERMOSA" store:Type="Tables" />
     <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="VISTAHERMOSA" store:Type="Tables" />

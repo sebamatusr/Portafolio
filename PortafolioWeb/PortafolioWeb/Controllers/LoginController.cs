@@ -25,43 +25,61 @@ namespace PortafolioWeb.Controllers
         {
 
             string username = user.RUT;
-            string password = user.PASSWORD;
+            string password = user.PASSWORD;            
 
-            FUNCIONARIO usuario = (from src in db.FUNCIONARIO
-                                   where src.RUT.Equals(username) && src.PASSWORD.Equals(password)
-                                   select src).FirstOrDefault();
+            int credencialesVadlidas = db.LoginValidador(username, password);
 
-            if (usuario != null)
+            if(credencialesVadlidas==1)
             {
+                FUNCIONARIO usuario = (from src in db.FUNCIONARIO
+                                       where src.RUT.Equals(username)
+                                       select src).FirstOrDefault();
+                if (usuario != null)
+                {
 
-                Session["rol_name"] = usuario.ROL.NOMBRE_ROL;
-                Session.Add("rol_id", (int)(usuario.ID_ROL));
-                Session.Add("rut", usuario.RUT);
-                Session.Add("nombre", usuario.NOMBRE);
-                string unidad = (from src in db.UNIDAD
-                                 where src.ID_UNIDAD == usuario.ROL.UNIDAD.ID_UNIDAD
-                                 select src.NOMBRE_UNIDAD).FirstOrDefault();
-                Session.Add("unidad", unidad);
+                    Session["rol_name"] = usuario.ROL.NOMBRE_ROL;
+                    Session.Add("rol_id", (int)(usuario.ID_ROL));
+                    Session.Add("rut", usuario.RUT);
+                    Session.Add("nombre", usuario.NOMBRE);
+                    string unidad = (from src in db.UNIDAD
+                                     where src.ID_UNIDAD == usuario.ROL.UNIDAD.ID_UNIDAD
+                                     select src.NOMBRE_UNIDAD).FirstOrDefault();
+                    Session.Add("unidad", unidad);
+                    if (Session["rol_name"].Equals("Administrador de TI"))
+                    {
+                        return View("Administrador", db.FUNCIONARIO);
+                    }
+                    if (Session["rol_name"].Equals("Jefe Unidad Superior"))
+                    {
+                        return View("JefeUnidadSuperior", db.FUNCIONARIO);
+                    }
+                    else if (Session["rol_name"].Equals("Funcionario"))
+                    {
+                        return RedirectToAction("Index", "FuncionarioSolicitud");
+                    }
+                    else if (Session["rol_name"].Equals("Alcalde"))
+                    {
+                        return View("JefeUnidadSuperior", db.FUNCIONARIO);
+                    }
+                    else if (Session["rol_name"].Equals("Jefe Unidad Interior"))
+                    {
+                        return View("JefeUnidadInterior", db.FUNCIONARIO);
+                    }
 
-                if (Session["rol_name"].Equals("Jefe Unidad Superior"))
-                {
-                    return View("JefeUnidadSuperior", db.FUNCIONARIO);
                 }
-                else if (Session["rol_name"].Equals("Funcionario"))
-                {
-                    return RedirectToAction("Index", "FuncionarioSolicitud");
-                }
-                else if (Session["rol_name"].Equals("Alcalde"))
-                {
-                    return View("JefeUnidadSuperior", db.FUNCIONARIO);
-                }
-                else if (Session["rol_name"].Equals("Jefe Unidad Interior"))
-                {
-                    return View("JefeUnidadInterior", db.FUNCIONARIO);
-                }
-
             }
+
+
+            //añadir @Html.Raw(TempData["msg"]) en la vista
+            //TempData["msg"] = "<script>alert('Credenciales inválidas');</script>";
+            TempData["LoginInvalido"] = "LoginInvalido";
             return View();
+
+
+        }
+        public ActionResult Administrador()
+        {
+            return RedirectToAction("Index", "AdminController");
         }
         public ActionResult JefeUnidadInterior()
         {

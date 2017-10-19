@@ -243,5 +243,15 @@
       <End Role="TIPO_SOLICITUD" EntitySet="TIPO_SOLICITUD" />
       <End Role="SOLICITUD" EntitySet="SOLICITUD" />
     </AssociationSet>
+    <FunctionImport Name="ValidarLogin">
+      <Parameter Name="VRUT" Mode="In" Type="String" />
+      <Parameter Name="VPASS" Mode="In" Type="String" />
+      <Parameter Name="VSALIDA" Mode="Out" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="LoginValidador">
+      <Parameter Name="VRUT" Mode="In" Type="String" />
+      <Parameter Name="VPASS" Mode="In" Type="String" />
+      <Parameter Name="VSALIDA" Mode="Out" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

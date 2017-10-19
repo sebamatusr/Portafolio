@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Models.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Models.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ESTADO">
           <Key>
             <PropertyRef Name="ID_ESTADO" />
@@ -23,7 +23,7 @@
           <Property Name="APELLIDO_MATERNO" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
           <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="PASSWORD" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="100" Nullable="false" />
           <Property Name="EMAIL" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="FECHA_CREACION" Type="timestamp" Precision="6" Nullable="false" />
           <Property Name="FECHA_MODIFICACION" Type="timestamp" Precision="6" Nullable="false" />
@@ -191,6 +191,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="LOGINWEB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="VISTAHERMOSA">
+          <Parameter Name="VRUT" Type="varchar2" Mode="In" />
+          <Parameter Name="VPASS" Type="varchar2" Mode="In" />
+          <Parameter Name="VSALIDA" Type="number" Mode="Out" />
+        </Function>
+        <Function Name="VALID_USER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="VISTAHERMOSA" ReturnType="number">
+          <Parameter Name="P_USERNAME" Type="varchar2" Mode="In" />
+          <Parameter Name="P_PASSWORD" Type="varchar2" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="VISTAHERMOSA" store:Type="Tables" />
           <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="VISTAHERMOSA" store:Type="Tables" />
@@ -233,8 +242,7 @@
             <End Role="SOLICITUD" EntitySet="SOLICITUD" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -481,6 +489,16 @@
             <End Role="TIPO_SOLICITUD" EntitySet="TIPO_SOLICITUD" />
             <End Role="SOLICITUD" EntitySet="SOLICITUD" />
           </AssociationSet>
+          <FunctionImport Name="ValidarLogin">
+            <Parameter Name="VRUT" Mode="In" Type="String" />
+            <Parameter Name="VPASS" Mode="In" Type="String" />
+            <Parameter Name="VSALIDA" Mode="Out" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="LoginValidador">
+            <Parameter Name="VRUT" Mode="In" Type="String" />
+            <Parameter Name="VPASS" Mode="In" Type="String" />
+            <Parameter Name="VSALIDA" Mode="Out" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -583,6 +601,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ValidarLogin" FunctionName="Models.Store.LOGINWEB" />
+          <FunctionImportMapping FunctionImportName="LoginValidador" FunctionName="Models.Store.LOGINWEB" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -597,7 +617,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

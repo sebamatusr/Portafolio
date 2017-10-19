@@ -1,0 +1,29 @@
+Modify the hostname, port number, and project directory name for your specific application
+
+Start Page:
+http://localhost:63664/Project/WcfDataService.svc/
+
+Query EMPLOYEES table
+http://localhost:63664/Project/WcfDataService.svc/EMPLOYEES
+
+Query for EMPLOYEE_ID = 100
+http://localhost:63664/Project/WcfDataService.svc/EMPLOYEES(100)
+
+Query for the FIRST_NAME of EMPLOYEE_ID = 100
+http://localhost:63664/Project/WcfDataService.svc/EMPLOYEES(100)/FIRST_NAME
+
+Query first two EMPLOYEES results
+http://localhost:63664/Project/WcfDataService.svc/EMPLOYEES?$top=2
+
+Count number of rows
+http://localhost:63664/Project/WcfDataService.svc/EMPLOYEES/$count
+
+Query for EMPLOYEES with LAST_NAME = KING
+http://localhost:63664/Project/WcfDataService.svc/EMPLOYEES?$filter=LAST_NAME eq 'King'
+
+Query for EMPLOYEES paid more than 10000 per pay period
+http://localhost:63664/Project/WcfDataService.svc/EMPLOYEES?$filter=SALARY gt 10000
+
+Queryy to perform a join on EMPLOYEES and DEPARTMENTS on EMPLOYEE_ID = 100
+http://localhost:63664/Project/WcfDataService.svc/EMPLOYEES(100)?$expand=DEPARTMENTS
+ 
