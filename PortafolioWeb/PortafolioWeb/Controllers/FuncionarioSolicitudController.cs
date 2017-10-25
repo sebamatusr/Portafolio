@@ -7,6 +7,8 @@ using PortafolioWeb;
 using System.Data;
 using PortafolioWeb.Models;
 using PortafolioWeb.WebServiceRH;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace PortafolioWeb.Controllers
 {
@@ -43,7 +45,7 @@ namespace PortafolioWeb.Controllers
             }
             catch
             {
-               return RedirectToAction("Index","LoginController");
+                return RedirectToAction("Index", "LoginController");
             }
 
         }
@@ -66,7 +68,7 @@ namespace PortafolioWeb.Controllers
 
             foreach (var item in dates)
             {
-                if (webservice.GetAsistencia(rut,item))
+                if (webservice.GetAsistencia(rut, item))
                 {
                     return item;
                 }
@@ -74,7 +76,7 @@ namespace PortafolioWeb.Controllers
             return fin.AddDays(1);
             //return (fin.AddDays(1) - inicio).Days;
         }
-        
+
         public ActionResult GetPermisos(int id_tiposolicitud, string rut)
         {
             if (id_tiposolicitud <= 0)
@@ -93,7 +95,7 @@ namespace PortafolioWeb.Controllers
 
             string tipo_permiso = (from p in db.TIPO_SOLICITUD where p.ID_TIPOSOLICITUD == id_tiposolicitud select p.DESCRIPCION).FirstOrDefault().ToString();
 
-             if (solicitudes != null)
+            if (solicitudes != null)
             {
                 switch (tipo_permiso)
                 {
@@ -101,7 +103,7 @@ namespace PortafolioWeb.Controllers
                         int diasUsados = 0;
                         foreach (var item in solicitudes)
                         {
-                            DateTime fechaCorte = GetFechaCorte(rut,item.FECHA_INICIO, item.FECHA_FIN);
+                            DateTime fechaCorte = GetFechaCorte(rut, item.FECHA_INICIO, item.FECHA_FIN);
                             int dias = (item.FECHA_FIN - item.FECHA_INICIO).Days;
                             diasUsados += dias;
                         }
@@ -126,11 +128,23 @@ namespace PortafolioWeb.Controllers
         }
         public ActionResult ConsultarPermisos()
         {
-            if (!Session["rol_name"].Equals("Funcionario"))
+            if (Session["rol_name"] == null || !Session["rol_name"].Equals("Funcionario"))
             {
+                TempData["mensajeError"] = "Debe estar logueado para realizar esta acción";
                 return RedirectToAction("Index", "LoginController");
             }
             return View();
+        }
+        public ActionResult GetPermisosPorRut(string rut)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            SolicitudViewModel model = new SolicitudViewModel();
+            var solicitudes = db.SOLICITUD.Where(c => c.RUT_FUNCIONARIO.Equals(rut)).ToList();
+            object jsonO = new { data = solicitudes };
+            var json = JsonConvert.SerializeObject(solicitudes, new JsonSerializerSettings() { DateFormatString = "yyyy-MM-dd" });
+            //JObject jsonObj = JObject.Parse(json);
+
+            return Content(json, "application/json");
         }
         // GET: FuncionarioSolicitud/Details/5
         public ActionResult Details(int id)
@@ -138,11 +152,6 @@ namespace PortafolioWeb.Controllers
             return View();
         }
 
-        // GET: FuncionarioSolicitud/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: FuncionarioSolicitud/Create
         [HttpPost]
