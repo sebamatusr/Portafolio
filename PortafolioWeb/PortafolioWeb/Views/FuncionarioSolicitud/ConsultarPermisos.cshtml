@@ -3,6 +3,10 @@
     ViewBag.Title = "ConsultarPermisos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using Newtonsoft.Json
+@Styles.Render("https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js")
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -27,54 +31,59 @@
             <!-- Form Name -->
             <legend>Consulta de Permiso</legend>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">Rut Empleado</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <input class="form-control" name="comment" placeholder="Ingrese Rut">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4" align="center">
-                    <button type="button" id="boton" class="btn btn-primary btn-sm">Consultar</button>
-                </div>
-            </div>
-            <br />
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="table_">
                     <thead>
                         <tr>
-                            <th>N° permiso</th>
+                            <th>Identificador</th>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de término</th>
                             <th>Estado</th>
-                            <th>Fecha Solicitud</th>
-                            <th>Acción</th>
+                            <th>Fecha de emisión</th>
+                            <th>Descripción</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Anna</td>
-                            <td>Pitt</td>
-                            <td><button type="button">Ver permiso</button> <button type="button">Descargar</button></td>
-                        </tr>
-                    </tbody>
                 </table>
                 </div>
         </fieldset>
     </form>
 </div>
-
-<div class="form-group">
-    @Html.LabelFor(model => model.RUT, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.EditorFor(model => model.RUT, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.RUT, "", new { @class = "text-danger" })
-        <input type="submit" value="Consultar" class="btn btn-default" />
-    </div>
-    
-</div>
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        var rut = '@Session["rut"].ToString()';
+        var table = $("#table_").DataTable({
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            destroy: true,
+            responsive: true,
+            ajax:{
+                url: "/FuncionarioSolicitud/GetPermisosPorRut",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    rut: rut,
+                    function (data) {
+                        console.log(data);
+                        return JSON.stringify(data);
+                    }
+                },
+                dataSrc: "",
+                error: function () {
+                    alert("Algo salió mal.")
+                },
+            },
+            columns: [
+                { "data": "ID_SOLICITUD" },
+                { "data": "FECHA_INICIO" },
+                { "data": "FECHA_FIN" },
+                { "data": "ID_ESTADO" },
+                { "data": "FECHA_CREACION" },
+                { "data": "DESCRIPCION" },
+            ]
+    })
+    })
+</script>   
+}
 
