@@ -98,6 +98,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -196,6 +197,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloDatos.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DateTimeExtention.cs" />
+    <Compile Include="Models\Feriados.cs" />
+    <Compile Include="Models\FeriadosJSONcall.cs" />
     <Compile Include="Models\SolicitudViewModel.cs" />
     <Compile Include="MOTIVO.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
@@ -203,6 +207,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ROL.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\WebServiceRH\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SOLICITUD.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
@@ -220,6 +229,7 @@
     <Content Include="Content\jquery.dialog.css" />
     <Content Include="Content\jquery.dialog.min.css" />
     <Content Include="Content\logo.png" />
+    <Content Include="Content\snoAlertBox.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -307,6 +317,16 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\WebServiceRH\Asistencia.disco" />
+    <None Include="Service References\WebServiceRH\configuration91.svcinfo" />
+    <None Include="Service References\WebServiceRH\configuration.svcinfo" />
+    <Content Include="Service References\WebServiceRH\PortafolioWeb.WebServiceRH.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\WebServiceRH\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -335,6 +355,16 @@
     <Content Include="Views\Login\PermisosSelf.cshtml" />
     <Content Include="Views\Login\JefeUnidadInterior.cshtml" />
     <Content Include="Views\FuncionarioSolicitud\Index.cshtml" />
+    <None Include="Service References\WebServiceRH\Asistencia.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WebServiceRH\Asistencia1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WebServiceRH\Asistencia2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WebServiceRH\Service1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -352,6 +382,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\WebServiceRH\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

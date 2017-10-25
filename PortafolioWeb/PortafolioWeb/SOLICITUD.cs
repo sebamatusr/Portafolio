@@ -15,7 +15,7 @@ namespace PortafolioWeb
     public partial class SOLICITUD
     {
         public decimal ID_SOLICITUD { get; set; }
-        public decimal CODIGO_VERIFICACION { get; set; }
+        public string CODIGO_VERIFICACION { get; set; }
         public System.DateTime FECHA_INICIO { get; set; }
         public System.DateTime FECHA_FIN { get; set; }
         public System.DateTime FECHA_CREACION { get; set; }
@@ -25,6 +25,7 @@ namespace PortafolioWeb
         public decimal ID_ESTADO { get; set; }
         public string RUT_FUNCIONARIO { get; set; }
         public string RUT_EVALUADOR { get; set; }
+        public string DESCRIPCION { get; set; }
     
         public virtual ESTADO ESTADO1 { get; set; }
         public virtual FUNCIONARIO FUNCIONARIO { get; set; }

@@ -14,9 +14,7 @@ namespace PortafolioWeb
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    using Oracle.ManagedDataAccess.Client;
-    using System.Data;
-
+    
     public partial class Entities : DbContext
     {
         public Entities()
@@ -37,19 +35,6 @@ namespace PortafolioWeb
         public virtual DbSet<SOLICITUD> SOLICITUD { get; set; }
         public virtual DbSet<TIPO_SOLICITUD> TIPO_SOLICITUD { get; set; }
         public virtual DbSet<UNIDAD> UNIDAD { get; set; }
-    
-        public virtual int ValidarLogin(string vRUT, string vPASS, ObjectParameter vSALIDA)
-        {
-            var vRUTParameter = vRUT != null ?
-                new ObjectParameter("VRUT", vRUT) :
-                new ObjectParameter("VRUT", typeof(string));
-    
-            var vPASSParameter = vPASS != null ?
-                new ObjectParameter("VPASS", vPASS) :
-                new ObjectParameter("VPASS", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ValidarLogin", vRUTParameter, vPASSParameter, vSALIDA);
-        }
 
         public virtual int LoginValidador(string vRUT, string vPASS)
         {
@@ -57,7 +42,7 @@ namespace PortafolioWeb
             //var vPASSParameter = new OracleParameter("VPASS", OracleDbType.Varchar2, "vPASS", ParameterDirection.Input);
             //var vSALIDAParameter = new OracleParameter("VSALIDA", OracleDbType.Int32, ParameterDirection.Output);
 
-            var vSALIDA = new ObjectParameter("VSALIDA",typeof(int));
+            var vSALIDA = new ObjectParameter("VSALIDA", typeof(int));
 
             var vRUTParameter = vRUT != null ?
                 new ObjectParameter("VRUT", vRUT) :

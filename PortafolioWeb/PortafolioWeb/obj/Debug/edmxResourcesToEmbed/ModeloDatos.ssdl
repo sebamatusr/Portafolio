@@ -57,8 +57,8 @@
     <Key>
       <PropertyRef Name="ID_SOLICITUD" />
     </Key>
-    <Property Name="ID_SOLICITUD" Type="number" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="CODIGO_VERIFICACION" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_SOLICITUD" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CODIGO_VERIFICACION" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="FECHA_INICIO" Type="date" Nullable="false" />
     <Property Name="FECHA_FIN" Type="date" Nullable="false" />
     <Property Name="FECHA_CREACION" Type="timestamp" Precision="6" Nullable="false" />
@@ -68,6 +68,7 @@
     <Property Name="ID_ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
     <Property Name="RUT_FUNCIONARIO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="RUT_EVALUADOR" Type="varchar2" MaxLength="25" />
+    <Property Name="DESCRIPCION" Type="varchar2" MaxLength="255" />
   </EntityType>
   <EntityType Name="TIPO_SOLICITUD">
     <Key>

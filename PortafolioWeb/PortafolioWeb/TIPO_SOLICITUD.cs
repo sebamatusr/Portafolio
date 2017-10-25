@@ -20,7 +20,7 @@ namespace PortafolioWeb
             this.MOTIVO = new HashSet<MOTIVO>();
             this.SOLICITUD = new HashSet<SOLICITUD>();
         }
-        
+    
         public decimal ID_TIPOSOLICITUD { get; set; }
         public string DESCRIPCION { get; set; }
         public decimal CANTIDAD_DIAS { get; set; }

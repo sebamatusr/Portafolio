@@ -61,6 +61,7 @@
     <EntitySetMapping Name="SOLICITUD">
       <EntityTypeMapping TypeName="Models.SOLICITUD">
         <MappingFragment StoreEntitySet="SOLICITUD">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
           <ScalarProperty Name="ID_SOLICITUD" ColumnName="ID_SOLICITUD" />
           <ScalarProperty Name="CODIGO_VERIFICACION" ColumnName="CODIGO_VERIFICACION" />
           <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />

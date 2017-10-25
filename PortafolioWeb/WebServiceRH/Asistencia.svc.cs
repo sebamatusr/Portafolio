@@ -15,6 +15,42 @@ namespace WebServiceRH
     public class Service1 : IAsistencia
     {
 
+        public bool GetAsistencia(string rut, DateTime fecha)
+        {
+            //
+            using (OracleConnection con = new OracleConnection())
+            {
+                string constring = "DATA SOURCE=190.161.202.171:1521/DBORACLE;PASSWORD=portafolio;PERSIST SECURITY INFO=True;USER ID=VISTAHERMOSA";
+
+                con.ConnectionString = constring;
+
+                con.Open();
+
+                OracleCommand command = con.CreateCommand();
+
+                string sql;
+
+                string formato = fecha.ToString("dd-MM-yyyy");
+
+                sql = "SELECT ASISTE FROM ASISTENCIA WHERE RUT = '" + rut + "' AND to_char(FECHA, 'DD-MM-YYYY') = '" + formato + "'";
+
+                command.CommandText = sql;
+
+                OracleDataReader reader = command.ExecuteReader();
+
+                string asiste = "0";
+
+                while (reader.Read())
+                {
+                    asiste = reader["asiste"].ToString();
+                }
+                
+                //reader.Close(); 
+
+                return asiste == "1";
+            }
+        }
+
         
 
         public int GetAntiguedad(string rut)
@@ -22,7 +58,7 @@ namespace WebServiceRH
             //Obtiene la antigüedad del funcionario en meses
             using (OracleConnection con = new OracleConnection())
             {
-                string constring = "DATA SOURCE=190.163.62.242:1521/DBORACLE;PASSWORD=portafolio;PERSIST SECURITY INFO=True;USER ID=VISTAHERMOSA";
+                string constring = "DATA SOURCE=190.161.202.171:1521/DBORACLE;PASSWORD=portafolio;PERSIST SECURITY INFO=True;USER ID=VISTAHERMOSA";
                 con.ConnectionString = constring;
                 con.Open();
                 OracleCommand command = con.CreateCommand();
@@ -33,7 +69,8 @@ namespace WebServiceRH
                 reader.Read();
 
                 int result = Convert.ToInt32(reader.GetValue(0));
-                
+
+                reader.Close();
 
                 return result;
               

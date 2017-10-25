@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortafolioWeb", "PortafolioWeb\PortafolioWeb.csproj", "{D91759E3-9A2B-4C89-84E5-D4943F16C401}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C10A2020-8FE9-4160-BE41-EDCF398C27AD} = {C10A2020-8FE9-4160-BE41-EDCF398C27AD}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceRH", "WebServiceRH\WebServiceRH.csproj", "{C10A2020-8FE9-4160-BE41-EDCF398C27AD}"
 EndProject

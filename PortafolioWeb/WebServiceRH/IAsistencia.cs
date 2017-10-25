@@ -16,9 +16,9 @@ namespace WebServiceRH
         [WebGet(UriTemplate = "/Antigüedad/{rut}")]
         int GetAntiguedad(string rut);
 
-        //[OperationContract]
-        //[WebGet(UriTemplate = "/Asistencia/{rut}")]
-        //int GetAsistencia(string rut);
+        [OperationContract]
+        [WebGet(UriTemplate = "/Asistencia/{rut}/{fecha}")]
+        bool GetAsistencia(string rut, DateTime fecha);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

@@ -62,8 +62,8 @@
           <Key>
             <PropertyRef Name="ID_SOLICITUD" />
           </Key>
-          <Property Name="ID_SOLICITUD" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="CODIGO_VERIFICACION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_SOLICITUD" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CODIGO_VERIFICACION" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="FECHA_INICIO" Type="date" Nullable="false" />
           <Property Name="FECHA_FIN" Type="date" Nullable="false" />
           <Property Name="FECHA_CREACION" Type="timestamp" Precision="6" Nullable="false" />
@@ -73,6 +73,7 @@
           <Property Name="ID_ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="RUT_FUNCIONARIO" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="RUT_EVALUADOR" Type="varchar2" MaxLength="25" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="255" />
         </EntityType>
         <EntityType Name="TIPO_SOLICITUD">
           <Key>
@@ -312,8 +313,8 @@
           <Key>
             <PropertyRef Name="ID_SOLICITUD" />
           </Key>
-          <Property Name="ID_SOLICITUD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="CODIGO_VERIFICACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_SOLICITUD" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODIGO_VERIFICACION" Type="String" Nullable="false" />
           <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" />
           <Property Name="FECHA_FIN" Type="DateTime" Nullable="false" />
           <Property Name="FECHA_CREACION" Type="DateTime" Precision="6" Nullable="false" />
@@ -327,6 +328,7 @@
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.SOLICITUD_FUNCIONARIO_FK" FromRole="SOLICITUD" ToRole="FUNCIONARIO" />
           <NavigationProperty Name="FUNCIONARIO1" Relationship="Self.SOLICITUD_FUNCIONARIO_FKV2" FromRole="SOLICITUD" ToRole="FUNCIONARIO" />
           <NavigationProperty Name="TIPO_SOLICITUD" Relationship="Self.SOLICITUD_TIPO_SOLICITUD_FK" FromRole="SOLICITUD" ToRole="TIPO_SOLICITUD" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TIPO_SOLICITUD">
           <Key>
@@ -566,6 +568,7 @@
           <EntitySetMapping Name="SOLICITUD">
             <EntityTypeMapping TypeName="Models.SOLICITUD">
               <MappingFragment StoreEntitySet="SOLICITUD">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="ID_SOLICITUD" ColumnName="ID_SOLICITUD" />
                 <ScalarProperty Name="CODIGO_VERIFICACION" ColumnName="CODIGO_VERIFICACION" />
                 <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
