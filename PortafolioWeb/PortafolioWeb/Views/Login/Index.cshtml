@@ -7,29 +7,24 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Simple UI Kit Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- css -->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" media="all">
-    <!--// css -->
-    <!-- font -->
-    <link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <!-- //font -->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+@Styles.Render("~/Content/logintheme/css/reset.css")
+@Styles.Render("~/Content/logintheme/bootstrap/css/bootstrap.css")
+@Styles.Render("~/Content/logintheme/css/cssLogin.css")
+@*@Styles.Render("~/Content/logintheme/bootstrap/css/bootstrap-theme.min.css")*@  
 
-</head>
 <body>
 
-    <div class="main-w3">
+    <form  method="post">
+        <img src="~/Content/img/logoMunicipalidad.PNG">
+        <h3>Ilustre Municipalidad de Vista Hermosa</h3>
+
+        <input type="text" name="rut" placeholder="&#128590; Usuario">
+        <input type="password" name="password" placeholder="&#128272; Contraseña" >
+        <input type="submit" value="Ingresar"/>
+
+    </form>
+
+    @*<div class="main-w3">
           <div class="login-agile" >
 
 
@@ -94,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         
         
         <div class="clearfix"></div>
-        <!-- end  switches -->
+        <!-- end  switches -->*@
         
         
        
@@ -102,21 +97,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     
     <!--  player js -->
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script>
-            google.load("jquery", "1.7.1");
-            google.load("jqueryui", "1.8.16");
-    </script>
-    <script src="js/script.js"></script>
-    <!--  player js -->
-    <script src="js/Chart.min.js"></script>
-    <script src="js/pretty-doughtnut.js"></script>
-    <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
-    <script src="js/skycons.js"></script>
-    <script src="js/underscore-min.js" type="text/javascript"></script>
-    <script src="js/moment-2.2.1.js" type="text/javascript"></script>
-    <script src="js/clndr.js" type="text/javascript"></script>
-    <script src="js/site.js" type="text/javascript"></script>
     @if (TempData["LoginInvalido"] != null)
     {
         @Scripts.Render("~/bundles/alert")

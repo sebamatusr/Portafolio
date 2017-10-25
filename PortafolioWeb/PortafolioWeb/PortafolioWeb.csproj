@@ -226,8 +226,20 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\logoMuni.png" />
+    <Content Include="Content\img\logoMunicipalidad.PNG" />
     <Content Include="Content\jquery.dialog.css" />
     <Content Include="Content\jquery.dialog.min.css" />
+    <Content Include="Content\logintheme\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\logintheme\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\logintheme\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\logintheme\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\logintheme\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\logintheme\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\logintheme\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\logintheme\bootstrap\js\npm.js" />
+    <Content Include="Content\logintheme\css\cssLogin.css" />
+    <Content Include="Content\logintheme\css\reset.css" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\snoAlertBox.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -299,6 +311,14 @@
     <Content Include="ModeloDatos.edmx.diagram">
       <DependentUpon>ModeloDatos.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\logintheme\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Content\logintheme\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\logintheme\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\logintheme\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\logintheme\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\logintheme\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\logintheme\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\logintheme\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -365,6 +385,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\WebServiceRH\Service1.wsdl" />
+    <Content Include="Views\JefeInterno\Index.cshtml" />
+    <Content Include="Views\Alcalde\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
