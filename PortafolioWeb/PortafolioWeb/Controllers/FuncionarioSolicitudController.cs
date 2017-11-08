@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PortafolioWeb;
 using System.Data;
 using PortafolioWeb.Models;
 using PortafolioWeb.WebServiceRH;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace PortafolioWeb.Controllers
 {
@@ -77,7 +74,7 @@ namespace PortafolioWeb.Controllers
             //return (fin.AddDays(1) - inicio).Days;
         }
 
-        public ActionResult GetPermisos(int id_tiposolicitud, string rut)
+        public JsonResult GetPermisos(int id_tiposolicitud, string rut)
         {
             if (id_tiposolicitud <= 0)
             {
@@ -120,11 +117,10 @@ namespace PortafolioWeb.Controllers
                         return Json(diasDisponibles, JsonRequestBehavior.AllowGet);
                 }
             }
-
-
-
-            return Json(solicitudes, JsonRequestBehavior.AllowGet);
-
+            else
+            {
+                return Json(DiasSolicitud, JsonRequestBehavior.AllowGet);
+            }
         }
         public ActionResult ConsultarPermisos()
         {
@@ -166,7 +162,7 @@ namespace PortafolioWeb.Controllers
 
                 SOLICITUD solicitud = new SOLICITUD();
                 solicitud.CODIGO_VERIFICACION = guid;
-                solicitud.ID_ESTADO = 1;
+                solicitud.ID_ESTADO = 10;
                 var idsol = collection["Tipos_Solicitud"];
                 solicitud.ID_TIPOSOLICITUD = Convert.ToInt32(idsol);
                 solicitud.RUT_FUNCIONARIO = Session["rut"].ToString();
@@ -184,7 +180,7 @@ namespace PortafolioWeb.Controllers
 
                 Root feriados = FeriadosJSONcall.GetFeriados();
 
-                //int dias = BusinessDaysUntil(fechaInicio, fechaFin, feriados.feriados);
+                int dias = DateTimeExtention.BusinessDaysUntil(fechaInicio, fechaFin, feriados.feriados);
                 solicitud.FECHA_INICIO = fechaInicio;
                 solicitud.FECHA_FIN = fechaFin;
                 solicitud.ESTADO = 1;
@@ -217,43 +213,109 @@ namespace PortafolioWeb.Controllers
         // GET: FuncionarioSolicitud/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            using (db)
+            {
+                SolicitudViewModel model = new SolicitudViewModel();
+
+
+
+                model.Solicitudes = db.SOLICITUD.ToList();
+                model.Tipos_Solicitud = db.TIPO_SOLICITUD.ToList();
+                model.Motivos = db.MOTIVO.ToList();
+                model.solicitud = model.SOLICITUD.Where(a => a.ID_SOLICITUD == id).FirstOrDefault();
+                return View(model);
+            }
         }
 
         // POST: FuncionarioSolicitud/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(FormCollection collection)
         {
+            
             try
             {
-                // TODO: Add update logic here
+                bool status = false;
+                if(Convert.ToInt32(collection["solicitud.ID_SOLICITUD"]) > 0)
+                {
+                    int idsol = Convert.ToInt32(collection["solicitud.ID_SOLICITUD"]);
+                    var permiso = db.SOLICITUD.Where(a => a.ID_SOLICITUD == idsol).FirstOrDefault();
+                    if (permiso != null)
+                    {
+                        permiso.FECHA_MODIFICACION = DateTime.Now;
 
-                return RedirectToAction("Index");
+                        string fechaInputInicio = collection["solicitud.FECHA_INICIO"];
+                        string fechaInputFin = collection["solicitud.FECHA_FIN"];
+
+                        IFormatProvider culture = new System.Globalization.CultureInfo("en-US", true);
+
+                        DateTime fechaInicio = DateTime.Parse(fechaInputInicio, culture, System.Globalization.DateTimeStyles.AssumeLocal);
+                        DateTime fechaFin = DateTime.Parse(fechaInputFin, culture, System.Globalization.DateTimeStyles.AssumeLocal);
+
+                        Root feriados = FeriadosJSONcall.GetFeriados();
+
+                        permiso.FECHA_INICIO = fechaInicio;
+                        permiso.FECHA_FIN = fechaFin;
+                        permiso.DESCRIPCION = collection["comment"];
+                        var idtipo = collection["Tipos_Solicitud"];
+                        permiso.ID_TIPOSOLICITUD = Convert.ToInt32(idtipo);
+                        db.Configuration.AutoDetectChangesEnabled = true;
+                        db.ChangeTracker.HasChanges();
+                        db.SaveChanges();
+                        status = true;
+                    }
+                }
+                return new JsonResult { Data = new { status = status } };
+
+
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                string msgEx = ex.Message;
+                return RedirectToAction("Index");
             }
         }
 
         // GET: FuncionarioSolicitud/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (db)
+            {
+                var permiso = db.SOLICITUD.Where(a => a.ID_SOLICITUD == id).FirstOrDefault();
+                if (permiso != null)
+                {
+                    return View(permiso);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
         }
 
         // POST: FuncionarioSolicitud/Delete/5
         [HttpPost]
+        [ActionName("Delete")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                bool status = false;
+                using (db)
+                {
+                    var permiso = db.SOLICITUD.Where(a => a.ID_SOLICITUD == id).FirstOrDefault();
+                    if (permiso != null)
+                    {
+                        db.SOLICITUD.Remove(permiso);
+                        db.SaveChanges();
+                        status = true;
+                    }
+                }
 
-                return RedirectToAction("Index");
+                return new JsonResult { Data = new { status = status } };
             }
-            catch
+            catch (Exception ex)
             {
+                string msgEx = ex.Message;
                 return View();
             }
         }

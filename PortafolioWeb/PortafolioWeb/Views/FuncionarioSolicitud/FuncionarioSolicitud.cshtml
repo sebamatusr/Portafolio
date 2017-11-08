@@ -44,17 +44,6 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Motivos, "Motivo de la solicitud", new { @class = "control-label col-md-4" })
-                <div class="col-md-4 selectContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        @Html.DropDownListFor(model => model.Motivos, new SelectList(Enumerable.Empty<SelectListItem>(), "ID_MOTIVO", "DESCRIPCION"), "- Por favor seleccione -", new {id = "Motivos", @class = "form-control selectpicker" })
-                        @Html.ValidationMessageFor(model => model.Motivos, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
                 @Html.LabelFor(model => model.solicitud.FECHA_INICIO, "Fecha de inicio del permiso", new { @class = "control-label col-md-4" })
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
@@ -92,7 +81,7 @@
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4" align="center">
                     <button type="submit" id="boton" class="btn btn-primary btn-sm">Ingresar solicitud</button>
-                    @TempData["SuccessInsert"];
+                    @TempData["SuccessInsert"]
                 </div>
             </div>
 

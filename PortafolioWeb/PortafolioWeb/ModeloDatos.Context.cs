@@ -52,11 +52,21 @@ namespace PortafolioWeb
                 new ObjectParameter("VPASS", vPASS) :
                 new ObjectParameter("VPASS", typeof(string));
 
-            var query = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LoginValidador", vRUTParameter, vPASSParameter, vSALIDA);
+            try
+            {
+                var query = ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LoginValidador", vRUTParameter, vPASSParameter, vSALIDA);
+                int output = Convert.ToInt32(vSALIDA.Value);
 
-            int output = Convert.ToInt32(vSALIDA.Value);
+                return output;
+            }
+            catch (Exception ex)
+            {
+                string mensaje = ex.Message;
+                return 0;
+            }
+            
 
-            return output;
+            
         }
     }
 }

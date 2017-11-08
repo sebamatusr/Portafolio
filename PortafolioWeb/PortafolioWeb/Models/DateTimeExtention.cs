@@ -38,6 +38,7 @@ namespace PortafolioWeb.Models
 
         public static int BusinessDaysUntil(this DateTime firstDay, DateTime lastDay, params Feriados[] bankHolidays)
         {
+
             firstDay = firstDay.Date;
             lastDay = lastDay.Date;
             if (firstDay > lastDay)

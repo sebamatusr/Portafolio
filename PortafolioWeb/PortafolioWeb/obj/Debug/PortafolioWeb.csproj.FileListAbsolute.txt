@@ -270,3 +270,14 @@ C:\Users\alexis\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\es\Syste
 C:\Users\alexis\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\obj\Debug\PortafolioWeb.csprojResolveAssemblyReference.cache
 C:\Users\alexis\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\obj\Debug\PortafolioWeb.dll
 C:\Users\alexis\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\obj\Debug\PortafolioWeb.pdb
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\System.Net.Http.Formatting.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\System.Web.Http.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\System.Web.Http.WebHost.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\System.Net.Http.Formatting.xml
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\System.Web.Http.xml
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\System.Web.Http.WebHost.xml
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\itextsharp.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\itextsharp.xml
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\Microsoft.ReportViewer.Common.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\PortafolioWeb\bin\Microsoft.ReportViewer.WebForms.DLL
