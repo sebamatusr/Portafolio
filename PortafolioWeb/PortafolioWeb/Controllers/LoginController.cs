@@ -38,7 +38,6 @@ namespace PortafolioWeb.Controllers
                                            select src).FirstOrDefault();
                     if (usuario != null)
                     {
-
                         Session["rol_name"] = usuario.ROL.NOMBRE_ROL;
                         Session.Add("rol_id", (int)(usuario.ID_ROL));
                         Session.Add("id_unidad", (int)(usuario.ID_UNIDAD));

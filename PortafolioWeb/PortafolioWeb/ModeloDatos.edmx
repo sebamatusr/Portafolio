@@ -35,9 +35,10 @@
           <Key>
             <PropertyRef Name="ID_RESOLUCION" />
           </Key>
-          <Property Name="ID_RESOLUCION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_RESOLUCION" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FECHA_EMISION" Type="timestamp" Precision="6" Nullable="false" />
           <Property Name="RUT_EMISOR" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="UNIDAD" Type="varchar2" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="MOTIVO">
           <Key>
@@ -63,7 +64,7 @@
             <PropertyRef Name="ID_SOLICITUD" />
           </Key>
           <Property Name="ID_SOLICITUD" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CODIGO_VERIFICACION" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CODIGO_VERIFICACION" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="FECHA_INICIO" Type="date" Nullable="false" />
           <Property Name="FECHA_FIN" Type="date" Nullable="false" />
           <Property Name="FECHA_CREACION" Type="timestamp" Precision="6" Nullable="false" />
@@ -282,10 +283,11 @@
           <Key>
             <PropertyRef Name="ID_RESOLUCION" />
           </Key>
-          <Property Name="ID_RESOLUCION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_RESOLUCION" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FECHA_EMISION" Type="DateTime" Precision="6" Nullable="false" />
           <Property Name="RUT_EMISOR" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.HISTORIAL_FUNCIONARIO_FK" FromRole="HISTORIAL_RESOLUCIONES" ToRole="FUNCIONARIO" />
+          <Property Name="UNIDAD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MOTIVO">
           <Key>
@@ -539,6 +541,7 @@
           <EntitySetMapping Name="HISTORIAL_RESOLUCIONES">
             <EntityTypeMapping TypeName="Models.HISTORIAL_RESOLUCIONES">
               <MappingFragment StoreEntitySet="HISTORIAL_RESOLUCIONES">
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
                 <ScalarProperty Name="ID_RESOLUCION" ColumnName="ID_RESOLUCION" />
                 <ScalarProperty Name="FECHA_EMISION" ColumnName="FECHA_EMISION" />
                 <ScalarProperty Name="RUT_EMISOR" ColumnName="RUT_EMISOR" />

@@ -1,0 +1,10 @@
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\bin\Debug\EntityPortafolio.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\bin\Debug\EntityPortafolio.pdb
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\obj\Debug\EntityPortafolio.csprojResolveAssemblyReference.cache
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\obj\Debug\EntityPortafolio.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\obj\Debug\EntityPortafolio.pdb
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\bin\Debug\EntityFramework.dll
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\bin\Debug\EntityFramework.xml
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\EntityPortafolio\bin\Debug\es\EntityFramework.resources.dll

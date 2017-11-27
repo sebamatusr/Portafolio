@@ -13,9 +13,9 @@ namespace PortafolioWeb.Models
         public IEnumerable<SOLICITUD> Solicitudes { get; set; }
         public IEnumerable<TIPO_SOLICITUD> Tipos_Solicitud { get; set; }
         public IEnumerable<FUNCIONARIO> Funcionarios { get; set; }
+        public IEnumerable<UNIDAD> Unidades { get; set; }
 
-       
-        
+
         public SOLICITUD solicitud { get; set; }
 
         public IEnumerable<MOTIVO> Motivos { get; set; }

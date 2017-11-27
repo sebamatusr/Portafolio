@@ -88,8 +88,13 @@
                 { "data": "FECHA_CREACION", "autoWidth": true },
                 { "data": "DESCRIPCION", "autoWidth": true },
                 {
-                    "data": "ID_SOLICITUD", "width": "100px", "render": function (data) {
-                        return '<a class="popup" href="/FuncionarioSolicitud/Edit/' + data + '">Editar</a> / <a class="popup" href="/FuncionarioSolicitud/Delete/' + data + '">Borrar</a>';
+                    "data": null, "width": "100px", "render": function (data, type, row) {
+                        if (data.ID_ESTADO == 10) {
+                            return '<a class="popup" href="/FuncionarioSolicitud/Edit/' + data.ID_SOLICITUD + '">Editar</a> / <a class="popup" href="/FuncionarioSolicitud/Delete/' + data.ID_SOLICITUD + '">Borrar</a>';
+                        }
+                        else {
+                            return 'Sin acción';
+                        }                    
                     }
                 },
             ]

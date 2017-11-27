@@ -303,11 +303,22 @@ namespace PortafolioWeb.Controllers
                 using (db)
                 {
                     var permiso = db.SOLICITUD.Where(a => a.ID_SOLICITUD == id).FirstOrDefault();
+
                     if (permiso != null)
                     {
-                        db.SOLICITUD.Remove(permiso);
-                        db.SaveChanges();
-                        status = true;
+                        if (permiso.ESTADO1.DESCRIPCION.Equals("Pendiente"))
+                        {
+                            permiso.ESTADO = 0;
+                            permiso.ESTADO1 = db.ESTADO.Where(e => e.ID_ESTADO == permiso.ID_ESTADO).FirstOrDefault();
+                            db.Configuration.AutoDetectChangesEnabled = true;
+                            db.ChangeTracker.HasChanges();
+                            db.SaveChanges();
+                            status = true;
+                        }
+                        else
+                        {
+                            return new JsonResult { Data = new { status = status } };
+                        }
                     }
                 }
 

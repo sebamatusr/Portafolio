@@ -44,9 +44,9 @@ namespace WebServiceRH
                 {
                     asiste = reader["asiste"].ToString();
                 }
-                
-                //reader.Close(); 
 
+                //reader.Close(); 
+                con.Close();
                 return asiste == "1";
             }
         }

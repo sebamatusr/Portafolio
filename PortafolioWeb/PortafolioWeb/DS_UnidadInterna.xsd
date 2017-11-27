@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_UnidadInterna" targetNamespace="http://tempuri.org/DS_UnidadInterna.xsd" xmlns:mstns="http://tempuri.org/DS_UnidadInterna.xsd" xmlns="http://tempuri.org/DS_UnidadInterna.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Web.config)" ParameterPrefix=":" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ConnectionString.ConnectionString" Provider="Oracle.ManagedDataAccess.Client" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DT_PermisosUIAdapter" GeneratorDataComponentClassName="DT_PermisosUIAdapter" Name="DT_PermisosUI" UserDataComponentName="DT_PermisosUIAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        VISTAHERMOSA.UNIDAD.NOMBRE_UNIDAD, derivedtbl_1.EXPR1 AS RECHAZADAS, derivedtbl_2.EXPR1 AS APROBADAS, derivedtbl_3.EXPR1 AS TOTALES
+FROM            VISTAHERMOSA.FUNCIONARIO INNER JOIN
+                         VISTAHERMOSA.SOLICITUD ON VISTAHERMOSA.FUNCIONARIO.RUT = VISTAHERMOSA.SOLICITUD.RUT_FUNCIONARIO INNER JOIN
+                         VISTAHERMOSA.UNIDAD ON VISTAHERMOSA.FUNCIONARIO.ID_UNIDAD = VISTAHERMOSA.UNIDAD.ID_UNIDAD,
+                             (SELECT        COUNT(SOLICITUD_1.ID_SOLICITUD) AS EXPR1
+                               FROM            VISTAHERMOSA.FUNCIONARIO FUNCIONARIO_1 INNER JOIN
+                                                         VISTAHERMOSA.SOLICITUD SOLICITUD_1 ON FUNCIONARIO_1.RUT = SOLICITUD_1.RUT_FUNCIONARIO INNER JOIN
+                                                         VISTAHERMOSA.UNIDAD UNIDAD_1 ON FUNCIONARIO_1.ID_UNIDAD = UNIDAD_1.ID_UNIDAD
+                               WHERE        (SOLICITUD_1.ID_ESTADO = 12)
+                               GROUP BY UNIDAD_1.NOMBRE_UNIDAD) derivedtbl_1,
+                             (SELECT        COUNT(SOLICITUD_2.ID_SOLICITUD) AS EXPR1
+                               FROM            VISTAHERMOSA.FUNCIONARIO FUNCIONARIO_2 INNER JOIN
+                                                         VISTAHERMOSA.SOLICITUD SOLICITUD_2 ON FUNCIONARIO_2.RUT = SOLICITUD_2.RUT_FUNCIONARIO INNER JOIN
+                                                         VISTAHERMOSA.UNIDAD UNIDAD_2 ON FUNCIONARIO_2.ID_UNIDAD = UNIDAD_2.ID_UNIDAD
+                               WHERE        (SOLICITUD_2.ID_ESTADO = 11)
+                               GROUP BY UNIDAD_2.NOMBRE_UNIDAD) derivedtbl_2,
+                             (SELECT        COUNT(SOLICITUD_3.ID_SOLICITUD) AS EXPR1
+                               FROM            VISTAHERMOSA.FUNCIONARIO FUNCIONARIO_3 INNER JOIN
+                                                         VISTAHERMOSA.SOLICITUD SOLICITUD_3 ON FUNCIONARIO_3.RUT = SOLICITUD_3.RUT_FUNCIONARIO INNER JOIN
+                                                         VISTAHERMOSA.UNIDAD UNIDAD_3 ON FUNCIONARIO_3.ID_UNIDAD = UNIDAD_3.ID_UNIDAD
+                               GROUP BY UNIDAD_3.NOMBRE_UNIDAD) derivedtbl_3
+WHERE        (VISTAHERMOSA.SOLICITUD.ID_ESTADO = 12)
+GROUP BY VISTAHERMOSA.UNIDAD.NOMBRE_UNIDAD, derivedtbl_1.EXPR1, derivedtbl_2.EXPR1, derivedtbl_3.EXPR1</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NOMBRE_UNIDAD" DataSetColumn="NOMBRE_UNIDAD" />
+              <Mapping SourceColumn="RECHAZADAS" DataSetColumn="RECHAZADAS" />
+              <Mapping SourceColumn="APROBADAS" DataSetColumn="APROBADAS" />
+              <Mapping SourceColumn="TOTALES" DataSetColumn="TOTALES" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ResumenFuncionariosTableAdapter" GeneratorDataComponentClassName="ResumenFuncionariosTableAdapter" Name="ResumenFuncionarios" UserDataComponentName="ResumenFuncionariosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        VISTAHERMOSA.SOLICITUD.RUT_FUNCIONARIO, VISTAHERMOSA.FUNCIONARIO.NOMBRE, VISTAHERMOSA.FUNCIONARIO.APELLIDO_PATERNO, VISTAHERMOSA.FUNCIONARIO.APELLIDO_MATERNO, COUNT(*) AS CANTIDAD, 
+                         VISTAHERMOSA.UNIDAD.NOMBRE_UNIDAD, VISTAHERMOSA.ESTADO.DESCRIPCION, VISTAHERMOSA.TIPO_SOLICITUD.DESCRIPCION AS TIPO_SOLICITUD
+FROM            VISTAHERMOSA.SOLICITUD INNER JOIN
+                         VISTAHERMOSA.FUNCIONARIO ON VISTAHERMOSA.SOLICITUD.RUT_FUNCIONARIO = VISTAHERMOSA.FUNCIONARIO.RUT INNER JOIN
+                         VISTAHERMOSA.TIPO_SOLICITUD ON VISTAHERMOSA.SOLICITUD.ID_TIPOSOLICITUD = VISTAHERMOSA.TIPO_SOLICITUD.ID_TIPOSOLICITUD INNER JOIN
+                         VISTAHERMOSA.UNIDAD ON VISTAHERMOSA.FUNCIONARIO.ID_UNIDAD = VISTAHERMOSA.UNIDAD.ID_UNIDAD INNER JOIN
+                         VISTAHERMOSA.ESTADO ON VISTAHERMOSA.SOLICITUD.ID_ESTADO = VISTAHERMOSA.ESTADO.ID_ESTADO
+GROUP BY VISTAHERMOSA.SOLICITUD.RUT_FUNCIONARIO, VISTAHERMOSA.FUNCIONARIO.NOMBRE, VISTAHERMOSA.FUNCIONARIO.APELLIDO_PATERNO, VISTAHERMOSA.FUNCIONARIO.APELLIDO_MATERNO, 
+                         VISTAHERMOSA.UNIDAD.NOMBRE_UNIDAD, VISTAHERMOSA.ESTADO.DESCRIPCION, VISTAHERMOSA.TIPO_SOLICITUD.DESCRIPCION</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="RUT_FUNCIONARIO" DataSetColumn="RUT_FUNCIONARIO" />
+              <Mapping SourceColumn="NOMBRE" DataSetColumn="NOMBRE" />
+              <Mapping SourceColumn="APELLIDO_PATERNO" DataSetColumn="APELLIDO_PATERNO" />
+              <Mapping SourceColumn="APELLIDO_MATERNO" DataSetColumn="APELLIDO_MATERNO" />
+              <Mapping SourceColumn="CANTIDAD" DataSetColumn="CANTIDAD" />
+              <Mapping SourceColumn="NOMBRE_UNIDAD" DataSetColumn="NOMBRE_UNIDAD" />
+              <Mapping SourceColumn="DESCRIPCION" DataSetColumn="DESCRIPCION" />
+              <Mapping SourceColumn="TIPO_SOLICITUD" DataSetColumn="TIPO_SOLICITUD" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_UnidadInterna" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_UnidadInterna" msprop:Generator_UserDSName="DS_UnidadInterna">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DT_PermisosUI" msprop:Generator_TableClassName="DT_PermisosUIDataTable" msprop:Generator_TableVarName="tableDT_PermisosUI" msprop:Generator_RowChangedName="DT_PermisosUIRowChanged" msprop:Generator_TablePropName="DT_PermisosUI" msprop:Generator_RowDeletingName="DT_PermisosUIRowDeleting" msprop:Generator_RowChangingName="DT_PermisosUIRowChanging" msprop:Generator_RowEvHandlerName="DT_PermisosUIRowChangeEventHandler" msprop:Generator_RowDeletedName="DT_PermisosUIRowDeleted" msprop:Generator_RowClassName="DT_PermisosUIRow" msprop:Generator_UserTableName="DT_PermisosUI" msprop:Generator_RowEvArgName="DT_PermisosUIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NOMBRE_UNIDAD" msprop:Generator_ColumnVarNameInTable="columnNOMBRE_UNIDAD" msprop:Generator_ColumnPropNameInRow="NOMBRE_UNIDAD" msprop:Generator_ColumnPropNameInTable="NOMBRE_UNIDADColumn" msprop:Generator_UserColumnName="NOMBRE_UNIDAD">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RECHAZADAS" msprop:Generator_ColumnVarNameInTable="columnRECHAZADAS" msprop:Generator_ColumnPropNameInRow="RECHAZADAS" msprop:Generator_ColumnPropNameInTable="RECHAZADASColumn" msprop:Generator_UserColumnName="RECHAZADAS" type="xs:decimal" minOccurs="0" />
+              <xs:element name="APROBADAS" msprop:Generator_ColumnVarNameInTable="columnAPROBADAS" msprop:Generator_ColumnPropNameInRow="APROBADAS" msprop:Generator_ColumnPropNameInTable="APROBADASColumn" msprop:Generator_UserColumnName="APROBADAS" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TOTALES" msprop:Generator_ColumnVarNameInTable="columnTOTALES" msprop:Generator_ColumnPropNameInRow="TOTALES" msprop:Generator_ColumnPropNameInTable="TOTALESColumn" msprop:Generator_UserColumnName="TOTALES" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ResumenFuncionarios" msprop:Generator_TableClassName="ResumenFuncionariosDataTable" msprop:Generator_TableVarName="tableResumenFuncionarios" msprop:Generator_TablePropName="ResumenFuncionarios" msprop:Generator_RowDeletingName="ResumenFuncionariosRowDeleting" msprop:Generator_RowChangingName="ResumenFuncionariosRowChanging" msprop:Generator_RowEvHandlerName="ResumenFuncionariosRowChangeEventHandler" msprop:Generator_RowDeletedName="ResumenFuncionariosRowDeleted" msprop:Generator_UserTableName="ResumenFuncionarios" msprop:Generator_RowChangedName="ResumenFuncionariosRowChanged" msprop:Generator_RowEvArgName="ResumenFuncionariosRowChangeEvent" msprop:Generator_RowClassName="ResumenFuncionariosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RUT_FUNCIONARIO" msprop:Generator_ColumnVarNameInTable="columnRUT_FUNCIONARIO" msprop:Generator_ColumnPropNameInRow="RUT_FUNCIONARIO" msprop:Generator_ColumnPropNameInTable="RUT_FUNCIONARIOColumn" msprop:Generator_UserColumnName="RUT_FUNCIONARIO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOMBRE" msprop:Generator_ColumnVarNameInTable="columnNOMBRE" msprop:Generator_ColumnPropNameInRow="NOMBRE" msprop:Generator_ColumnPropNameInTable="NOMBREColumn" msprop:Generator_UserColumnName="NOMBRE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="APELLIDO_PATERNO" msprop:Generator_ColumnVarNameInTable="columnAPELLIDO_PATERNO" msprop:Generator_ColumnPropNameInRow="APELLIDO_PATERNO" msprop:Generator_ColumnPropNameInTable="APELLIDO_PATERNOColumn" msprop:Generator_UserColumnName="APELLIDO_PATERNO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="APELLIDO_MATERNO" msprop:Generator_ColumnVarNameInTable="columnAPELLIDO_MATERNO" msprop:Generator_ColumnPropNameInRow="APELLIDO_MATERNO" msprop:Generator_ColumnPropNameInTable="APELLIDO_MATERNOColumn" msprop:Generator_UserColumnName="APELLIDO_MATERNO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANTIDAD" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCANTIDAD" msprop:Generator_ColumnPropNameInRow="CANTIDAD" msprop:Generator_ColumnPropNameInTable="CANTIDADColumn" msprop:Generator_UserColumnName="CANTIDAD" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NOMBRE_UNIDAD" msprop:Generator_ColumnVarNameInTable="columnNOMBRE_UNIDAD" msprop:Generator_ColumnPropNameInRow="NOMBRE_UNIDAD" msprop:Generator_ColumnPropNameInTable="NOMBRE_UNIDADColumn" msprop:Generator_UserColumnName="NOMBRE_UNIDAD">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnDESCRIPCION" msprop:Generator_ColumnPropNameInRow="DESCRIPCION" msprop:Generator_ColumnPropNameInTable="DESCRIPCIONColumn" msprop:Generator_UserColumnName="DESCRIPCION">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TIPO_SOLICITUD" msprop:Generator_ColumnVarNameInTable="columnTIPO_SOLICITUD" msprop:Generator_ColumnPropNameInRow="TIPO_SOLICITUD" msprop:Generator_ColumnPropNameInTable="TIPO_SOLICITUDColumn" msprop:Generator_UserColumnName="TIPO_SOLICITUD">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

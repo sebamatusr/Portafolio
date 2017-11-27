@@ -100,8 +100,16 @@ namespace PortafolioWeb.Controllers
                         db.ChangeTracker.HasChanges();
                         db.SaveChanges();
                         status = true;
-                        GenerarDocumentoPDF(permiso);
 
+                        MemoryStream memoryStream = new MemoryStream();
+
+                        MemoryStream pdfStream = GenerarDocumentoPDF(permiso, memoryStream);
+
+                        NetMailController mailController = new NetMailController();
+
+                        permiso.FUNCIONARIO = db.FUNCIONARIO.Where(f => f.RUT.Equals(permiso.RUT_FUNCIONARIO)).FirstOrDefault();
+
+                        mailController.sendMail(permiso.FUNCIONARIO.EMAIL, permiso.FUNCIONARIO.NOMBRE, pdfStream);
                     }
                 }
                 return new JsonResult { Data = new { status = status } };
@@ -115,7 +123,7 @@ namespace PortafolioWeb.Controllers
             }
         }
 
-        private void GenerarDocumentoPDF(SOLICITUD permiso)
+        private MemoryStream GenerarDocumentoPDF(SOLICITUD permiso, MemoryStream memstream)
         {
             FUNCIONARIO func = db.FUNCIONARIO.Where(r => r.RUT.Equals(permiso.RUT_FUNCIONARIO)).FirstOrDefault();
             UNIDAD unidadfunc = db.UNIDAD.Where(u => u.ID_UNIDAD == func.ID_UNIDAD).FirstOrDefault();
@@ -127,8 +135,10 @@ namespace PortafolioWeb.Controllers
             revisor.ROL = db.ROL.Where(r => r.ID_ROL == revisor.ID_ROL).FirstOrDefault();
             string rolrevisor = revisor.ROL.DESCRIPCION_ROL.ToUpper();
 
+            memstream.Position = 0;
+
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
-            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("C:\\testspdf\\Text.pdf", FileMode.Create, FileAccess.ReadWrite));
+            PdfWriter wri = PdfWriter.GetInstance(doc, memstream);
             doc.Open();
 
             string imgurl = "C:/Users/Mr Eko/Source/Repos/Portafolio/PortafolioWeb/PortafolioWeb/Content/img/logoMunicipalidad.PNG";
@@ -196,7 +206,10 @@ namespace PortafolioWeb.Controllers
 
             doc.Add(new Paragraph(" "));
             doc.Add(codigo);
+            wri.CloseStream = false;
             doc.Close();
+
+            return memstream;
         }
 
         public ActionResult Rechazar(int id)

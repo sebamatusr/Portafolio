@@ -32,6 +32,7 @@
     <EntitySetMapping Name="HISTORIAL_RESOLUCIONES">
       <EntityTypeMapping TypeName="Models.HISTORIAL_RESOLUCIONES">
         <MappingFragment StoreEntitySet="HISTORIAL_RESOLUCIONES">
+          <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
           <ScalarProperty Name="ID_RESOLUCION" ColumnName="ID_RESOLUCION" />
           <ScalarProperty Name="FECHA_EMISION" ColumnName="FECHA_EMISION" />
           <ScalarProperty Name="RUT_EMISOR" ColumnName="RUT_EMISOR" />

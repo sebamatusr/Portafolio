@@ -40,7 +40,7 @@
                             <th>Fecha término</th>
                             <th>Fecha creación</th>
                             <th>Estado del permiso</th>
-                            <th>Editar</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                 </table>
@@ -50,9 +50,15 @@
 </div>
 @section Scripts{
     <script>
-    $(document).ready(function () {
-        var rut = '@Session["rut"].ToString()';
-        var unidad = '@Session["id_unidad"].ToString()';
+        $(document).ready(function () {
+            try {
+                var rut = '@Session["rut"].ToString()';
+
+                var unidad = '@Session["id_unidad"].ToString()';
+            } catch (e) {
+                return window.location.href = "/";
+            }
+        
         var table = $("#table_").DataTable({
             language: {
                 url: "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
@@ -67,7 +73,6 @@
                 data: {
                     unidad: unidad,
                     function (data) {
-                        console.log(JSON.stringify(data))
                         return JSON.stringify(data);
                     }
                 },
@@ -91,8 +96,13 @@
                     }
                 },
                 {
-                    "data": "ID_SOLICITUD", "width": "100px", "render": function (data) {
-                        return '<a class="popup" href="/JefeInterno/Evaluar/' + data + '">Aprobar</a> / <a class="popup" href="/JefeInterno/Rechazar/' + data + '">Rechazar</a>';
+                    "data": null, "width": "100px", "render": function (data, type, row) {
+                        if (data.ID_ESTADO == 10) {
+                           return '<a class="popup" href="/JefeInterno/Evaluar/' + data.ID_SOLICITUD + '">Aprobar</a> / <a class="popup" href="/JefeInterno/Rechazar/' + data.ID_SOLICITUD + '">Rechazar</a>';
+                        }
+                        else {
+                            return 'Sin acción';
+                        }                    
                     }
                 },
             ]

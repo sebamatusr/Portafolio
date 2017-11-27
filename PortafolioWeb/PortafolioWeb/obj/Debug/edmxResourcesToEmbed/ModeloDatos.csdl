@@ -35,10 +35,11 @@
     <Key>
       <PropertyRef Name="ID_RESOLUCION" />
     </Key>
-    <Property Name="ID_RESOLUCION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_RESOLUCION" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FECHA_EMISION" Type="DateTime" Precision="6" Nullable="false" />
     <Property Name="RUT_EMISOR" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="FUNCIONARIO" Relationship="Self.HISTORIAL_FUNCIONARIO_FK" FromRole="HISTORIAL_RESOLUCIONES" ToRole="FUNCIONARIO" />
+    <Property Name="UNIDAD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="MOTIVO">
     <Key>

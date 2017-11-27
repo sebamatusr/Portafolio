@@ -8,6 +8,8 @@ namespace PortafolioWeb
         // Para obtener más información sobre Bundles, visite http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/monthPicker").Include(
+                        "~/Scripts/monthPicker.js"));
             bundles.Add(new ScriptBundle("~/bundles/alert").Include(
                         "~/Scripts/jquery.alert.js"));
 
@@ -36,7 +38,8 @@ namespace PortafolioWeb
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/jquery.dialog.min.css"
+                      "~/Content/jquery.dialog.min.css",
+                      "~/Content/iframeresize.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

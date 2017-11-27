@@ -17,6 +17,7 @@ namespace PortafolioWeb
         public decimal ID_RESOLUCION { get; set; }
         public System.DateTime FECHA_EMISION { get; set; }
         public string RUT_EMISOR { get; set; }
+        public string UNIDAD { get; set; }
     
         public virtual FUNCIONARIO FUNCIONARIO { get; set; }
     }
