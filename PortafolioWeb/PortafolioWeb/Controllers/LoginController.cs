@@ -53,7 +53,7 @@ namespace PortafolioWeb.Controllers
                         }
                         if (Session["rol_name"].Equals("Jefe Unidad Superior"))
                         {
-                            return View("JefeUnidadSuperior", db.FUNCIONARIO);
+                            return RedirectToAction("Index", "JefeSuperior");
                         }
                         else if (Session["rol_name"].Equals("Funcionario"))
                         {

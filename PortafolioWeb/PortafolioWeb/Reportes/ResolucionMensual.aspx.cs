@@ -13,7 +13,7 @@ namespace PortafolioWeb.Reportes
         {
             string unidad = Request.QueryString["unidad"];
 
-            SqlDataSource1.SelectParameters["IDUNIDAD"].DefaultValue = "26";
+            SqlDataSource1.SelectParameters["IDUNIDAD"].DefaultValue = unidad;
         }
     }
 }

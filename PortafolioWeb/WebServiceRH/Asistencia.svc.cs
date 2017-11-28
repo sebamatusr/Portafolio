@@ -63,14 +63,16 @@ namespace WebServiceRH
                 con.Open();
                 OracleCommand command = con.CreateCommand();
                 string sql;
-                sql = "SELECt TRUNC(MONTHS_BETWEEN(SYSDATE, FECHA_INGRESO)) from CONTRATO_FUNCIONARIO where rut = '" + rut + "'";
+                sql = "SELECt TRUNC(MONTHS_BETWEEN(SYSDATE, FECHA_INGRESO)) AS ANTIQUE from CONTRATO_FUNCIONARIO where rut = '" + rut + "'";
                 command.CommandText = sql;
                 OracleDataReader reader = command.ExecuteReader();
-                reader.Read();
 
-                int result = Convert.ToInt32(reader.GetValue(0));
+                int result = 0;
 
-                reader.Close();
+                while (reader.Read())
+                {
+                    result = Convert.ToInt32(reader["ANTIQUE"].ToString());
+                }
 
                 return result;
               

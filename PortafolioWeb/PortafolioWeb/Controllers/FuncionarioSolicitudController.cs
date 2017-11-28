@@ -18,7 +18,7 @@ namespace PortafolioWeb.Controllers
         {
             if (!Session["rol_name"].Equals("Funcionario"))
             {
-                return RedirectToAction("Index", "LoginController");
+                return RedirectToAction("Index", "Login");
             }
             return View();
         }
@@ -28,7 +28,7 @@ namespace PortafolioWeb.Controllers
             {
                 if (!Session["rol_name"].Equals("Funcionario"))
                 {
-                    return RedirectToAction("Index", "LoginController");
+                    return RedirectToAction("Index", "Login");
                 }
 
                 SolicitudViewModel model = new SolicitudViewModel();
@@ -42,7 +42,7 @@ namespace PortafolioWeb.Controllers
             }
             catch
             {
-                return RedirectToAction("Index", "LoginController");
+                return RedirectToAction("Index", "Login");
             }
 
         }
@@ -83,7 +83,7 @@ namespace PortafolioWeb.Controllers
 
             db.Configuration.LazyLoadingEnabled = false;
 
-            var solicitudes = db.SOLICITUD.Where(c => c.ID_ESTADO == 2 &&
+            var solicitudes = db.SOLICITUD.Where(c => c.ID_ESTADO == 11 &&
                                                  c.RUT_FUNCIONARIO.Equals(rut) &&
                                                  c.ID_TIPOSOLICITUD == id_tiposolicitud &&
                                                  c.FECHA_INICIO.Year == DateTime.Now.Year).ToList();
@@ -94,22 +94,34 @@ namespace PortafolioWeb.Controllers
 
             if (solicitudes != null)
             {
+                int diasUsados = 0;
+                int diasDisponibles = 0;
                 switch (tipo_permiso)
                 {
-                    case ("Permiso Administrativo"):
-                        int diasUsados = 0;
+                    case ("Feriado Legal Anual"):
+                        AsistenciaClient webservice = new AsistenciaClient();
+                        int antique = webservice.GetAntiguedad(rut)/12;
                         foreach (var item in solicitudes)
                         {
                             DateTime fechaCorte = GetFechaCorte(rut, item.FECHA_INICIO, item.FECHA_FIN);
                             int dias = (item.FECHA_FIN - item.FECHA_INICIO).Days;
                             diasUsados += dias;
                         }
-                        int diasDisponibles = DiasSolicitud - diasUsados;
+                        if (antique>=1 && antique < 15)
+                        {
+                            DiasSolicitud = 15;
+                        }
+                        else if (antique >= 15 && antique < 20)
+                        {
+                            DiasSolicitud = 20;
+                        }
+                        diasDisponibles = DiasSolicitud - diasUsados;
                         return Json(diasDisponibles, JsonRequestBehavior.AllowGet);
                     default:
                         diasUsados = 0;
                         foreach (var item in solicitudes)
                         {
+                            DateTime fechaCorte = GetFechaCorte(rut, item.FECHA_INICIO, item.FECHA_FIN);
                             int dias = (item.FECHA_FIN - item.FECHA_INICIO).Days;
                             diasUsados += dias;
                         }
@@ -127,7 +139,7 @@ namespace PortafolioWeb.Controllers
             if (Session["rol_name"] == null || !Session["rol_name"].Equals("Funcionario"))
             {
                 TempData["mensajeError"] = "Debe estar logueado para realizar esta acción";
-                return RedirectToAction("Index", "LoginController");
+                return RedirectToAction("Index", "Login");
             }
             return View();
         }

@@ -8,20 +8,24 @@ namespace PortafolioWeb.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
-        public ActionResult Index()
+        public ActionResult ValidarPermiso()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Index(FormCollection data)
+        public ActionResult ValidarPermiso(FormCollection data)
         {
             string codigo = data["codigo"].ToString();
             bool resultado = ValidarSolicitud(codigo);
-            if(resultado)
+            if (resultado)
                 TempData["SuccessInsert"] = "El permiso es válido";
             else
                 TempData["SuccessInsert"] = "El permiso no existe";
+            return View();
+        }
+        // GET: Admin
+        public ActionResult Index()
+        {
             return View();
         }
 

@@ -123,6 +123,30 @@ namespace PortafolioWeb.Controllers
             }
         }
 
+        public void VerPDF(int id_permiso)
+        {
+            SOLICITUD permiso = db.SOLICITUD.Where(a => a.ID_SOLICITUD == id_permiso).FirstOrDefault();
+            MemoryStream memoryStream = new MemoryStream();
+            MemoryStream pdfStream = GenerarDocumentoPDF(permiso, memoryStream);
+            Response.ClearContent();
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("Content-Disposition", "inline; filename=" + "Permiso.pdf");
+            //Response.AddHeader("Content-Length", docSize.ToString());
+            Response.BinaryWrite((byte[])pdfStream.ToArray());
+            Response.End();
+
+        }
+        public void ResendMail(int id_permiso)
+        {
+            SOLICITUD permiso = db.SOLICITUD.Where(a => a.ID_SOLICITUD == id_permiso).FirstOrDefault();
+            MemoryStream memoryStream = new MemoryStream();
+            MemoryStream pdfStream = GenerarDocumentoPDF(permiso, memoryStream);
+            NetMailController mailController = new NetMailController();
+            permiso.FUNCIONARIO = db.FUNCIONARIO.Where(f => f.RUT.Equals(permiso.RUT_FUNCIONARIO)).FirstOrDefault();
+            mailController.sendMail(permiso.FUNCIONARIO.EMAIL, permiso.FUNCIONARIO.NOMBRE, pdfStream);
+
+        }
+
         private MemoryStream GenerarDocumentoPDF(SOLICITUD permiso, MemoryStream memstream)
         {
             FUNCIONARIO func = db.FUNCIONARIO.Where(r => r.RUT.Equals(permiso.RUT_FUNCIONARIO)).FirstOrDefault();
@@ -276,5 +300,34 @@ namespace PortafolioWeb.Controllers
                 return View();
             }
         }
+        public ActionResult ValidarPermiso()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ValidarPermiso (FormCollection data)
+        {
+            string codigo = data["codigo"].ToString();
+            bool resultado = ValidarSolicitud(codigo);
+            if (resultado)
+                TempData["SuccessInsert"] = "El permiso es válido";
+            else
+                TempData["SuccessInsert"] = "El permiso no existe";
+            return View();
+        }
+        private static bool ValidarSolicitud(string codigo)
+        {
+            bool valido = false;
+
+            SOLICITUD sol = new Entities().SOLICITUD.Where(s => s.CODIGO_VERIFICACION.Equals(codigo)).FirstOrDefault();
+
+            if (sol != null)
+            {
+                valido = true;
+            }
+
+            return valido;
+        }
+
     }
 }

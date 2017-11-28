@@ -15,6 +15,7 @@
         <ul class="nav navbar-nav">
             <li class="active">@Html.ActionLink("Inicio", "Index", "JefeInterno")</li>
             <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisosFuncionarios", "JefeInterno")</li>
+            <li class="active">@Html.ActionLink("Validar Documento", "ValidarPermiso", "JefeInterno")</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
@@ -99,6 +100,10 @@
                     "data": null, "width": "100px", "render": function (data, type, row) {
                         if (data.ID_ESTADO == 10) {
                            return '<a class="popup" href="/JefeInterno/Evaluar/' + data.ID_SOLICITUD + '">Aprobar</a> / <a class="popup" href="/JefeInterno/Rechazar/' + data.ID_SOLICITUD + '">Rechazar</a>';
+                        }
+                        else if(data.ID_ESTADO == 11)
+                        {
+                            return '<a href="/JefeInterno/VerPDF?id_permiso=' + data.ID_SOLICITUD + '" target="_blank"> Ver PDF</a> / <a href="/JefeInterno/ResendMail?id_permiso=' + data.ID_SOLICITUD + '" target="_blank"> Reenviar Email</a>'
                         }
                         else {
                             return 'Sin acción';

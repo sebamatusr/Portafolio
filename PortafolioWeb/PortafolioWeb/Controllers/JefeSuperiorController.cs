@@ -118,8 +118,36 @@ namespace PortafolioWeb.Controllers
         }
         public ActionResult Resolucion(int id)
         {
-
+            TempData["id_unidad"] = id.ToString();
             return View();
+        }
+        public ActionResult ListarFuncionariosPorUnidad()
+        {
+            model.Unidades = db.UNIDAD.ToList();
+            TempData["unidad"] = 0;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ListarFuncionariosPorUnidad(FormCollection col)
+        {
+            model.Unidades = db.UNIDAD.ToList();
+            TempData["unidad"] = Convert.ToInt32(col["Unidades"]);
+
+            return View(model);
+        }
+        public ActionResult GetFuncionariosPorUnidad(int unidad)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            var funcionarios = (from f in db.FUNCIONARIO
+                                where f.ESTADO == 1 && f.ID_UNIDAD == unidad
+                                select new
+                                {
+                                    f.RUT,
+                                    NOMBRECOMPLETO = f.NOMBRE + " " + f.APELLIDO_PATERNO,
+                                    f.EMAIL
+                                }).ToList();
+            var json = JsonConvert.SerializeObject(funcionarios, new JsonSerializerSettings() { DateFormatString = "yyyy-MM-dd" });
+            return Content(json, "application/json");
         }
     }
 }
