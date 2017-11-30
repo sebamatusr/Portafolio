@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Solicitar Permiso", "FuncionarioSolicitud", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisos", "FuncionarioSolicitud")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+<br />
+<div class="container">
+    <form class="well form-horizontal">
+        <fieldset>
+            <legend>Bienvenido Funcionario</legend>
+            <div class="container" align="center">
+                <h3>I. Municipalidad de Vista Hermosa</h3>
+                <img src="~/Content/img/logoMuni.png" class="rounded mx-auto d-block">
+                <h4>Usuario:@Session["nombre"].ToString()</h4>
+                <h4>Unidad:@Session["unidad"].ToString()</h4>
+            </div>
+        </fieldset>
+    </form>
+
+</div>

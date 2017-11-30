@@ -33,7 +33,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                         @Html.TextBox("codigo", null, new { @placeholder = "qkkjs72j-098e-4173-8c8x-f8s15c24e5fd", @class = "form-control", @id = "codigo", @required = "true" })
-                    </div>
+                    </div>  
                 </div>
             </div>
             <!-- Button -->
@@ -43,7 +43,10 @@
                     <button type="submit" id="boton" class="btn btn-primary btn-sm">Verificar solicitud</button>
                 </div>
             </div>
-            @TempData["SuccessInsert"]
+            <div align="center">
+                @Html.Raw(TempData["SuccessInsert"])
+            </div>
+            
 
         </fieldset>
     </form>

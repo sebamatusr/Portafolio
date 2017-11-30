@@ -1,0 +1,67 @@
+﻿@model PortafolioWeb.Models.SolicitudViewModel
+@{
+    ViewBag.Title = "ResolucionForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Generar Resolucion", "ResolucionForm", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Consultar Resoluciones", "ConsultarResolucion", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Consultar situación de funcionarios", "ListarFuncionariosPorUnidad", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Resumen Cuantitativo", "ResumenCuantitativo", "JefeSuperior")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+
+<br />
+
+<legend>Generar resolución mensual de permisos</legend>
+
+<div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>En esta página usted puede generar una resolución mensual de los permisos de los funcionarios de una determinada unidad interna. <br />A continuación,
+    seleccione una unidad y presione "Generar". <br />La resolución se genererá para el mes ya cursado y puede ser visualizada en la pestaña "Consultar resolución".</strong>
+</div>
+
+<form class="well form-horizontal" method="post">
+    <fieldset>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UNIDAD, "Seleccione una unidad", new { @class = "control-label col-md-4" })
+            <div class="col-md-4 selectContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    @Html.DropDownListFor(model => model.Unidades, new SelectList(Model.Unidades, "ID_UNIDAD", "NOMBRE_UNIDAD"), "- Por favor seleccione -", new { id = "Unidad", @class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Unidades, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4" align="center">
+                <button type="submit" id="boton" class="btn btn-primary btn-sm">Generar</button>
+            </div>
+         </div>
+        @Html.Raw(TempData["GenerarResult"])
+    </fieldset>
+</form>
+
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+        $("#month").keypress(function (e) {
+            e.preventDefault();
+        });
+    });
+</script>    
+}

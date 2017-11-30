@@ -1,0 +1,163 @@
+﻿@model PortafolioWeb.Models.SolicitudViewModel
+@{
+    ViewBag.Title = "FuncionarioSolicitud";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/snoAlertBox.css")
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Solicitar Permiso", "FuncionarioSolicitud", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisos", "FuncionarioSolicitud")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+<br/>
+<div class="container">
+
+    <form class="well form-horizontal" method="post">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Solicitud de Permiso</legend>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Tipos_Solicitud, "Tipo de solicitud", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        @Html.DropDownListFor(model => model.Tipos_Solicitud, new SelectList(Model.Tipos_Solicitud, "ID_TIPOSOLICITUD", "DESCRIPCION"), "- Por favor seleccione -", new {id = "TipoSolicitud", @class = "form-control selectpicker", @onchange= "MostrarMotivos(); DiasDisponibles();" })
+                        @Html.ValidationMessageFor(model => model.Tipos_Solicitud,"",new { @class = "text-danger" })
+                    </div>
+                    <div id="snoAlertBox" class="alert alert-info col-md-11" data-alert="alert"></div>
+                </div>
+                
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.solicitud.FECHA_INICIO, "Fecha de inicio del permiso", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        @Html.TextBoxFor(model => model.solicitud.FECHA_INICIO, new {@placeholder = "Seleccione una fecha", @class = "form-control datepicker", @id = "datepicker" })
+                        @Html.ValidationMessageFor(model => model.solicitud.FECHA_INICIO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.solicitud.FECHA_FIN, "Fecha de finalización del permiso (inclusive)", new { @class = "control-label col-md-4" })
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        @Html.TextBoxFor(model => model.solicitud.FECHA_FIN, new { @placeholder = "Seleccione una fecha", @class = "form-control datepicker", @id = "datepicker2" })
+                        @Html.ValidationMessageFor(model => model.solicitud.FECHA_FIN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Descripción</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <textarea id="descripcion" class="form-control" name="comment" placeholder="Ingrese descripción"></textarea>
+                        @Html.ValidationMessageFor(model => model.solicitud.DESCRIPCION, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4" align="center">
+                    <button type="submit" id="boton" class="btn btn-primary btn-sm">Ingresar solicitud</button>
+                    @TempData["SuccessInsert"]
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+@section Scripts {
+    <script>
+
+        
+
+      function MostrarMotivos() {
+        var id_tiposolicitud = $('#TipoSolicitud').val();
+        $.ajax({
+            url: '/FuncionarioSolicitud/GetMotivos',
+            type: "GET",
+            dataType: "JSON",
+            data: { id_tiposolicitud: id_tiposolicitud },
+            success: function (motivos) {
+                $("#Motivos").html(""); // clear before appending new list
+                $.each(motivos, function (i, motivo) {
+                    $("#Motivos").append(
+                        $('<option></option>').val(motivo.ID_MOTIVO).html(motivo.DESCRIPCION));
+                });
+            },
+            error: function()  
+            {  
+                alert("Algo salió mal.")  
+            },  
+        });
+      }
+
+      $(document).ready(function () {
+          $("#datepicker").keypress(function (e) {
+              e.preventDefault();
+          });
+
+          $("#datepicker2").keypress(function (e) {
+              e.preventDefault();
+          });
+
+          $(".datepicker").datepicker({      
+              onSelect: function(dateText, inst){
+                  $("#datepicker2").datepicker("option","minDate",
+                  $("#datepicker").datepicker("getDate"));
+              }
+          });
+      });
+
+      function DiasDisponibles() {
+
+          var id_tiposolicitud = $('#TipoSolicitud').val();
+          var rut = '@Session["rut"].ToString()';
+          $.ajax({
+              url: '/FuncionarioSolicitud/GetPermisos',
+              type: "GET",
+              dataType: "JSON",
+              data: { id_tiposolicitud: id_tiposolicitud , rut: rut},
+              success: function (dias) {
+                  $("#diasDisp").html(""); // clear before appending new list
+                  $("#diasDisp").attr("max", dias);
+                  var mensaje = dias + " días disponibles."
+                  $("#snoAlertBox").html(mensaje.toString());
+                  $("#snoAlertBox").fadeIn();
+                  window.setTimeout(function () {
+                      $("#snoAlertBox").fadeOut(300)
+                  }, 3000);
+              },
+              error: function () {
+                  alert("Algo salió mal.")
+              }
+          });
+
+
+
+      }
+    </script>
+}
+

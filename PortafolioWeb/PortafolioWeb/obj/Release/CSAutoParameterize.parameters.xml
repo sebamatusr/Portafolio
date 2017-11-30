@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="Entities-Web.config Connection String" description="Entities Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/ModeloDatos.csdl|res://*/ModeloDatos.ssdl|res://*/ModeloDatos.msl;provider=Oracle.ManagedDataAccess.Client;provider connection string=&quot;DATA SOURCE=190.161.202.171:1521/DBORACLE;PASSWORD=portafolio;PERSIST SECURITY INFO=True;USER ID=VISTAHERMOSA&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Mr\ Eko\\Source\\Repos\\Portafolio\\PortafolioWeb\\PortafolioWeb\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Entities']/@connectionString" />
+  </parameter>
+  <parameter name="ConnectionString-Web.config Connection String" description="ConnectionString Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="DATA SOURCE=190.161.202.171:1521/DBORACLE;PASSWORD=portafolio;PERSIST SECURITY INFO=True;USER ID=VISTAHERMOSA" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Mr\ Eko\\Source\\Repos\\Portafolio\\PortafolioWeb\\PortafolioWeb\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

@@ -35,6 +35,6 @@ C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\WebServiceRH\bin\Microsoft
 C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\WebServiceRH\bin\Microsoft.AI.Web.xml
 C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\WebServiceRH\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\WebServiceRH\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\WebServiceRH\obj\Debug\WebServiceRH.csprojResolveAssemblyReference.cache
 C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\WebServiceRH\obj\Debug\WebServiceRH.dll
 C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\WebServiceRH\obj\Debug\WebServiceRH.pdb
-C:\Users\Mr Eko\Source\Repos\Portafolio\PortafolioWeb\WebServiceRH\obj\Debug\WebServiceRH.csprojResolveAssemblyReference.cache

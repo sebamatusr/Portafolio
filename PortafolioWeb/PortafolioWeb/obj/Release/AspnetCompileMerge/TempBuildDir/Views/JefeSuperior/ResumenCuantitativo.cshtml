@@ -1,0 +1,98 @@
+﻿@model PortafolioWeb.Models.SolicitudViewModel
+@{
+    ViewBag.Title = "ResumenCuantitativo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js")
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Generar Resolucion", "ResolucionForm", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Consultar Resoluciones", "ConsultarResolucion", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Consultar situación de funcionarios", "ListarFuncionariosPorUnidad", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Resumen Cuantitativo", "ResumenCuantitativo", "JefeSuperior")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+<br />
+
+<legend>Resumen cuantitativo por unidad</legend>
+
+<div class="container">
+
+    <form class="well form-horizontal">
+        <fieldset class="table-responsive">
+
+            <!-- Form Name -->
+            <legend>Consulta de resoluciones</legend>
+
+            <div style="width:90%; margin:0 auto" class="tablecontainer">
+                <table class="table" id="table_">
+                    <thead>
+                        <tr>
+                            <th>Nombre unidad</th>
+                            <th>Jefe unidad </th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </fieldset>
+    </form>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            try {
+                var rut = '@Session["rut"].ToString()';
+
+                var unidad = '@TempData["unidad"]';
+            } catch (e) {
+                return window.location.href = "/";
+            }
+
+        var table = $("#table_").DataTable({
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            destroy: true,
+            responsive: true,
+            ajax:{
+                url: "/Alcalde/GetUnidades",
+                type: "GET",
+                dataType: "JSON",
+                responsive: true,
+                data: {
+                    unidad: unidad,
+                    function (data) {
+                        return JSON.stringify(data);
+                    }
+                },
+                dataSrc: "",
+                error: function () {
+                    alert("Algo salió mal.")
+                },
+            },
+            columns: [
+                { "data": "NOMBRE_UNIDAD", "autoWidth": true },
+                { "data": "NOMBRE_JEFE", "autoWidth": true },
+                {
+                    "data": null, "width": "100px", "render": function (data) {
+                        return '<a href="/JefeSuperior/ResumenReport/' + data.ID_UNIDAD + '">Ver Reporte</a>';
+                    }
+                },
+            ]
+        })
+    })
+    </script>
+}
+

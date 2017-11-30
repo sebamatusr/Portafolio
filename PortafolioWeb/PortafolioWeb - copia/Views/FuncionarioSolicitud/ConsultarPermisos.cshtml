@@ -1,0 +1,151 @@
+﻿@model PortafolioWeb.FUNCIONARIO
+@{
+    ViewBag.Title = "ConsultarPermisos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Newtonsoft.Json
+@Styles.Render("https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js")
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Solicitar Permiso", "FuncionarioSolicitud", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisos", "FuncionarioSolicitud")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+<br/>
+<div class="container">
+
+    <form class="well form-horizontal">
+        <fieldset class="table-responsive">
+
+            <!-- Form Name -->
+            <legend>Consulta de Permiso</legend>
+
+            <div style="width:90%; margin:0 auto" class="tablecontainer">
+                <table class="table" id="table_">
+                    <thead>
+                        <tr>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de término</th>
+                            <th>Estado</th>
+                            <th>Fecha de emisión</th>
+                            <th>Descripción</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </fieldset>
+    </form>
+</div>
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        var rut = '@Session["rut"].ToString()';
+        var table = $("#table_").DataTable({
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            destroy: true,
+            responsive: true,
+            ajax:{
+                url: "/FuncionarioSolicitud/GetPermisosPorRut",
+                type: "GET",
+                dataType: "JSON",
+                responsive: true,
+                data: {
+                    rut: rut,
+                    function (data) {
+                        return JSON.stringify(data);
+                    }
+                },
+                dataSrc: "",
+                error: function () {
+                    alert("Algo salió mal.")
+                },
+            },
+            columns: [
+                { "data": "FECHA_INICIO", "autoWidth": true },
+                { "data": "FECHA_FIN", "autoWidth": true },
+                 {
+                     "data": "ID_ESTADO", "autoWidth": true, "render": function (data) {
+                         if (data == 10) { return 'Pendiente' }
+                         else if (data == 11) { return 'Aprobada' }
+                         else if (data == 12) { return 'Rechazada' }
+                         else { return 'Error' }
+                     }
+                 },
+                { "data": "FECHA_CREACION", "autoWidth": true },
+                { "data": "DESCRIPCION", "autoWidth": true },
+                {
+                    "data": null, "width": "100px", "render": function (data, type, row) {
+                        if (data.ID_ESTADO == 10) {
+                            return '<a class="popup" href="/FuncionarioSolicitud/Edit/' + data.ID_SOLICITUD + '">Editar</a> / <a class="popup" href="/FuncionarioSolicitud/Delete/' + data.ID_SOLICITUD + '">Borrar</a>';
+                        }
+                        else {
+                            return 'Sin acción';
+                        }                    
+                    }
+                },
+            ]
+        })
+        $('.tablecontainer').on('click', 'a.popup', function (e) {
+            e.preventDefault();
+            OpenPopup($(this).attr('href'));
+        })
+        function OpenPopup(pageUrl) {
+            var $pageContent = $('<div/>');
+            $pageContent.load(pageUrl, function () {
+                $('#popupForm', $pageContent).removeData('validator');
+                $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse('form');
+
+            });
+
+            $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                      .html($pageContent)
+                      .dialog({
+                          draggable: false,
+                          autoOpen: false,
+                          resizable: false,
+                          model: true,
+                          title: 'Sistema de gestión de permisos',
+                          height: 550,
+                          width: 600,
+                          close: function () {
+                              $dialog.dialog('destroy').remove();
+                          }
+                      })
+
+            $('.popupWindow').on('submit', '#popupForm', function (e) {
+                var url = $('#popupForm')[0].action;
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $('#popupForm').serialize(),
+                    success: function (data) {
+                        if (data.status) {
+                            $dialog.dialog('close');
+                            table.ajax.reload();
+                        }
+                    }
+                })
+
+                e.preventDefault();
+            })
+            $dialog.dialog('open');
+        }
+    })
+</script>   
+}
+

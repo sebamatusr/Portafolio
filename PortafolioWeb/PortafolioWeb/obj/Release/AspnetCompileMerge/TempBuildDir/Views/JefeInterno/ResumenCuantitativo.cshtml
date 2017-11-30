@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "ResumenCuantitativo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "JefeInterno")</li>
+            <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisosFuncionarios", "JefeInterno")</li>
+            <li class="active">@Html.ActionLink("Validar Documento", "ValidarPermiso", "JefeInterno")</li>
+            <li class="active">@Html.ActionLink("Resumen Cuantitativo", "ResumenCuantitativo", "JefeInterno")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+<br />
+<div class="fluidMedia">
+    <iframe src="@string.Format("../../Reportes/ResumenJefeInterno.aspx?unidad={0}", Session["id_unidad"])" frameborder="0"></iframe>
+</div>
+

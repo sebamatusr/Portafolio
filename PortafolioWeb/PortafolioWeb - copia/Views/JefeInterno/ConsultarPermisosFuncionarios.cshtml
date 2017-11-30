@@ -1,0 +1,163 @@
+﻿@model PortafolioWeb.FUNCIONARIO
+@{
+    ViewBag.Title = "ConsultarPermisosFuncionarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Newtonsoft.Json
+@Styles.Render("https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js")
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "JefeInterno")</li>
+            <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisosFuncionarios", "JefeInterno")</li>
+            <li class="active">@Html.ActionLink("Validar Documento", "ValidarPermiso", "JefeInterno")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+<br />
+<div class="container">
+
+    <form class="well form-horizontal">
+        <fieldset class="table-responsive">
+
+            <!-- Form Name -->
+            <legend>Consulta de Permiso</legend>
+
+            <div style="width:90%; margin:0 auto" class="tablecontainer">
+                <table class="table" id="table_">
+                    <thead>
+                        <tr>
+                            <th>Rut Funcionario</th>
+                            <th>Descripción</th>
+                            <th>Fecha inicio</th>
+                            <th>Fecha término</th>
+                            <th>Fecha creación</th>
+                            <th>Estado del permiso</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </fieldset>
+    </form>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            try {
+                var rut = '@Session["rut"].ToString()';
+
+                var unidad = '@Session["id_unidad"].ToString()';
+            } catch (e) {
+                return window.location.href = "/";
+            }
+        
+        var table = $("#table_").DataTable({
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            destroy: true,
+            responsive: true,
+            ajax:{
+                url: "/JefeInterno/GetPermisosPorUnidad",
+                type: "GET",
+                dataType: "JSON",
+                responsive: true,
+                data: {
+                    unidad: unidad,
+                    function (data) {
+                        return JSON.stringify(data);
+                    }
+                },
+                dataSrc: "",
+                error: function () {
+                    alert("Algo salió mal.")
+                },
+            },
+            columns: [
+                { "data": "RUT_FUNCIONARIO", "autoWidth": true },
+                { "data": "DESCRIPCION", "autoWidth": true },
+                { "data": "FECHA_INICIO", "autoWidth": true },
+                { "data": "FECHA_FIN", "autoWidth": true },
+                { "data": "FECHA_CREACION", "autoWidth": true },
+                {
+                    "data": "ID_ESTADO", "autoWidth": true, "render": function (data) {
+                        if (data == 10) { return 'Pendiente' }
+                        else if (data == 11) { return 'Aprobada' }
+                        else if (data == 12) { return 'Rechazada' }
+                        else {return 'Error'}
+                    }
+                },
+                {
+                    "data": null, "width": "100px", "render": function (data, type, row) {
+                        if (data.ID_ESTADO == 10) {
+                           return '<a class="popup" href="/JefeInterno/Evaluar/' + data.ID_SOLICITUD + '">Aprobar</a> / <a class="popup" href="/JefeInterno/Rechazar/' + data.ID_SOLICITUD + '">Rechazar</a>';
+                        }
+                        else if(data.ID_ESTADO == 11)
+                        {
+                            return '<a href="/JefeInterno/VerPDF?id_permiso=' + data.ID_SOLICITUD + '" target="_blank"> Ver PDF</a> / <a href="/JefeInterno/ResendMail?id_permiso=' + data.ID_SOLICITUD + '" target="_blank"> Reenviar Email</a>'
+                        }
+                        else {
+                            return 'Sin acción';
+                        }                    
+                    }
+                },
+            ]
+        })
+        $('.tablecontainer').on('click', 'a.popup', function (e) {
+            e.preventDefault();
+            OpenPopup($(this).attr('href'));
+        })
+        function OpenPopup(pageUrl) {
+            var $pageContent = $('<div/>');
+            $pageContent.load(pageUrl, function () {
+                $('#popupForm', $pageContent).removeData('validator');
+                $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse('form');
+
+            });
+
+            $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                      .html($pageContent)
+                      .dialog({
+                          draggable: false,
+                          autoOpen: false,
+                          resizable: false,
+                          model: true,
+                          title: 'Sistema de gestión de permisos',
+                          height: 300,
+                          width: 250,
+                          close: function () {
+                              $dialog.dialog('destroy').remove();
+                          }
+                      })
+
+            $('.popupWindow').on('submit', '#popupForm', function (e) {
+                var url = $('#popupForm')[0].action;
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $('#popupForm').serialize(),
+                    success: function (data) {
+                        if (data.status) {
+                            $dialog.dialog('close');
+                            table.ajax.reload();
+                        }
+                    }
+                })
+
+                e.preventDefault();
+            })
+            $dialog.dialog('open');
+        }
+    })
+    </script>
+}

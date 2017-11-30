@@ -11,9 +11,10 @@
             <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active">@Html.ActionLink("Inicio", "Index", "FuncionarioSolicitud")</li>
-            <li class="active">@Html.ActionLink("Solicitar Permiso", "FuncionarioSolicitud", "FuncionarioSolicitud")</li>
-            <li class="active">@Html.ActionLink("Consultar Permisos", "ConsultarPermisos", "FuncionarioSolicitud")</li>
+            <li class="active">@Html.ActionLink("Inicio", "Index", "Admin")</li>
+            <li class="active">@Html.ActionLink("Validar Permiso", "ValidarPermiso", "Admin")</li>
+            <li class="active">@Html.ActionLink("Consultar Situación de Funcionarios", "SituacionFuncionario", "Admin")</li>
+            <li class="active">@Html.ActionLink("Salida XML", "SalidaXML", "Admin")</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>

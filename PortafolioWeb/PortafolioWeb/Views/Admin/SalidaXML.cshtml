@@ -1,0 +1,127 @@
+﻿@model PortafolioWeb.Models.SolicitudViewModel
+@{
+    ViewBag.Title = "SalidaXML";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js")
+@Scripts.Render("https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js")
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "Admin")</li>
+            <li class="active">@Html.ActionLink("Validar Permiso", "ValidarPermiso", "Admin")</li>
+            <li class="active">@Html.ActionLink("Consultar Situación de Funcionarios", "SituacionFuncionario", "Admin")</li>
+            <li class="active">@Html.ActionLink("Salida XML", "SalidaXML", "Admin")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+<br />
+<legend>Generador XML</legend>
+<div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+        <strong>
+            En esta página puede descargar archivos XML con información sobre los permisos de los funcionarios. <br />
+            Si presiona el botón 'XML Global' descargará un archivo XML con los permisos de los funcionarios de todas las unidades.
+            En la lista a continuación, puede escoger un funcionario en particular para ver sus permisos en formato XML.
+        </strong>
+    </div>
+<form class="well form-horizontal" method="post">
+    <fieldset>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UNIDAD, "Seleccione una unidad", new { @class = "control-label col-md-4" })
+            <div class="col-md-4 selectContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    @Html.DropDownListFor(model => model.Unidades, new SelectList(Model.Unidades, "ID_UNIDAD", "NOMBRE_UNIDAD"), "- Por favor seleccione -", new { id = "Unidad", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Unidades, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4" align="center">
+                <button type="submit" id="boton" class="btn btn-primary btn-sm">Listar</button> <a href="/api/XMLDownload" class="btn btn-primary btn-sm" role="button">XML Global</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<br />
+
+<div class="container">
+
+    <form class="well form-horizontal">
+        <fieldset class="table-responsive">
+
+            <!-- Form Name -->
+            <legend>Lista de funcionarios con permisos</legend>
+
+            <div style="width:90%; margin:0 auto" class="tablecontainer">
+                <table class="table" id="table_">
+                    <thead>
+                        <tr>
+                            <th>Rut Funcionario</th>
+                            <th>Nombre Completo</th>
+                            <th>Email</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </fieldset>
+    </form>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            try {
+                var rut = '@Session["rut"].ToString()';
+
+                var unidad = '@TempData["unidad"]';
+            } catch (e) {
+                return window.location.href = "/";
+            }
+
+        var table = $("#table_").DataTable({
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            destroy: true,
+            responsive: true,
+            ajax:{
+                url: "/Admin/GetFuncionariosPorUnidad",
+                type: "GET",
+                dataType: "JSON",
+                responsive: true,
+                data: {
+                    unidad: unidad,
+                    function (data) {
+                        return JSON.stringify(data);
+                    }
+                },
+                dataSrc: "",
+                error: function () {
+                    alert("Algo salió mal.")
+                },
+            },
+            columns: [
+                { "data": "RUT", "autoWidth": true },
+                { "data": "NOMBRECOMPLETO", "autoWidth": true },
+                { "data": "EMAIL", "autoWidth": true },
+                {
+                    "data": null, "width": "100px", "render": function (data, type, row) {
+                           return '<a class="popup" target="_blank" href="/api/XMLDownload?rut=' + data.RUT + '">Descargar XML</a>';
+                    }
+                },
+            ]
+        })
+    })
+    </script>
+}

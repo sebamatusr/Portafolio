@@ -17,6 +17,7 @@ namespace PortafolioWeb.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            EndSession();
             return View();
         }
 
@@ -43,6 +44,7 @@ namespace PortafolioWeb.Controllers
                         Session.Add("id_unidad", (int)(usuario.ID_UNIDAD));
                         Session.Add("rut", usuario.RUT);
                         Session.Add("nombre", usuario.NOMBRE);
+                        Session.Add("apellido", usuario.APELLIDO_PATERNO);
                         string unidad = (from src in db.UNIDAD
                                          where src.ID_UNIDAD == usuario.ROL.UNIDAD.ID_UNIDAD
                                          select src.NOMBRE_UNIDAD).FirstOrDefault();

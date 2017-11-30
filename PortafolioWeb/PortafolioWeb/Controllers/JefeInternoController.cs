@@ -328,6 +328,9 @@ namespace PortafolioWeb.Controllers
 
             return valido;
         }
-
+        public ActionResult ResumenCuantitativo()
+        {
+            return View();
+        }
     }
 }

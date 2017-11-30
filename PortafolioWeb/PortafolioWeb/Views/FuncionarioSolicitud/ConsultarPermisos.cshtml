@@ -40,6 +40,7 @@
                             <th>Estado</th>
                             <th>Fecha de emisión</th>
                             <th>Descripción</th>
+                            <th>Tipo de solicitud</th>
                             <th>Editar</th>
                         </tr>
                     </thead>
@@ -87,10 +88,11 @@
                  },
                 { "data": "FECHA_CREACION", "autoWidth": true },
                 { "data": "DESCRIPCION", "autoWidth": true },
+                { "data": "TIPOSOL", "autoWidth": true },
                 {
                     "data": null, "width": "100px", "render": function (data, type, row) {
                         if (data.ID_ESTADO == 10) {
-                            return '<a class="popup" href="/FuncionarioSolicitud/Edit/' + data.ID_SOLICITUD + '">Editar</a> / <a class="popup" href="/FuncionarioSolicitud/Delete/' + data.ID_SOLICITUD + '">Borrar</a>';
+                           return '<a class="popup" href="/FuncionarioSolicitud/Delete/' + data.ID_SOLICITUD + '">Cancelar Solicitud</a>';
                         }
                         else {
                             return 'Sin acción';
@@ -120,8 +122,8 @@
                           resizable: false,
                           model: true,
                           title: 'Sistema de gestión de permisos',
-                          height: 550,
-                          width: 600,
+                          height: 300,
+                          width: 250,
                           close: function () {
                               $dialog.dialog('destroy').remove();
                           }

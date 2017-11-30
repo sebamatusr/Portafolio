@@ -14,6 +14,7 @@
             <li class="active">@Html.ActionLink("Generar Resolucion", "ResolucionForm", "JefeSuperior")</li>
             <li class="active">@Html.ActionLink("Consultar Resoluciones", "ConsultarResolucion", "JefeSuperior")</li>
             <li class="active">@Html.ActionLink("Consultar situación de funcionarios", "ListarFuncionariosPorUnidad", "JefeSuperior")</li>
+            <li class="active">@Html.ActionLink("Resumen Cuantitativo", "ResumenCuantitativo", "JefeSuperior")</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
@@ -50,7 +51,11 @@
                 <button type="submit" id="boton" class="btn btn-primary btn-sm">Generar</button>
             </div>
          </div>
-        @Html.Raw(TempData["GenerarResult"])
+        <div align="center">
+            @Html.Raw(TempData["GenerarResult"])
+            @Html.Raw(TempData["error"])
+        </div>
+        
     </fieldset>
 </form>
 

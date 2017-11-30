@@ -1,0 +1,37 @@
+﻿<style type="text/css">
+ 		*{
+ 			margin:0;
+ 			padding:0;
+ 			font-family:sans-serif;
+ 			box-sizing: border-box;
+ 		}
+ 		body{
+ 			background: #dfdfdf;
+ 			display:flex;
+ 			min-height:100vh;
+ 		}
+		form{
+			margin: auto;
+			width:30%;
+			max-width:400px;
+			background:#286090;
+			padding:30px;
+			border: 1px solid rgba(0,0,0,0,7);
+		}
+		h3{
+			text-align:center;
+			margin-botton:20px;
+			color:rgba(0,0,0,0.5);
+			color: #dfdfdf;
+		}
+		input{
+			display:block;
+			padding:5px;
+			width:100%;
+			margin:20px 0;
+			font-size:20px;
+		}
+		img{
+	    height: 20%; width: 100% ; 
+	
+}

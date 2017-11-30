@@ -520,6 +520,7 @@
       <DependentUpon>DS_UnidadInterna.xsd</DependentUpon>
     </Content>
     <Content Include="ReporteCuantitativo.pdf" />
+    <None Include="Properties\PublishProfiles\Portafolio.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\iframeToContent.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
@@ -607,6 +608,16 @@
     <Content Include="Views\JefeSuperior\ListarFuncionariosPorUnidad.cshtml" />
     <Content Include="Views\JefeInterno\ValidarPermiso.cshtml" />
     <Content Include="Views\Admin\ValidarPermiso.cshtml" />
+    <Content Include="Views\Alcalde\ConsultarFuncionarios.cshtml" />
+    <Content Include="Views\Alcalde\ConsultarResoluciones.cshtml" />
+    <Content Include="Views\Alcalde\VerificarPermiso.cshtml" />
+    <Content Include="Views\Alcalde\ResumenCuantitativo.cshtml" />
+    <Content Include="Views\Alcalde\ResumenReport.cshtml" />
+    <Content Include="Views\JefeSuperior\ResumenCuantitativo.cshtml" />
+    <Content Include="Views\JefeSuperior\ResumenReport.cshtml" />
+    <Content Include="Views\JefeInterno\ResumenCuantitativo.cshtml" />
+    <Content Include="Views\Alcalde\Resolucion.cshtml" />
+    <Content Include="Views\Admin\SalidaXML.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PortafolioWeb.FUNCIONARIO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+@Styles.Render("~/Content/logintheme/css/reset.css")
+@Styles.Render("~/Content/logintheme/bootstrap/css/bootstrap.css")
+@Styles.Render("~/Content/logintheme/css/cssLogin.css")
+@*@Styles.Render("~/Content/logintheme/bootstrap/css/bootstrap-theme.min.css")*@  
+
+<body>
+
+    <form  method="post">
+        <img src="~/Content/img/logoMunicipalidad.PNG">
+        <h3>Ilustre Municipalidad de Vista Hermosa</h3>
+
+        <input type="text" name="rut" placeholder="&#128590; Usuario">
+        <input type="password" name="password" placeholder="&#128272; Contraseña" >
+        <input type="submit" value="Ingresar" onclick="validarRut()"/>
+
+    </form>
+
+
+    @if (TempData["LoginInvalido"] != null)
+    {
+        @Scripts.Render("~/bundles/alert")
+    }
+
+</body>
+</html>
+
+<script>
+    function validaRut(objTxtRut, objTxtDv) {
+
+        var rut = objTxtRut.value + objTxtDv.value;
+
+        if (rut == "") return false;
+
+        var rutTMP = dejaSoloNumeros(rut);
+
+
+        var largo = rutTMP.length;
+        var dv = rutTMP.substring(largo - 1, largo);
+        rut = rutTMP.substring(0, largo - 1);
+        var i = 0;
+        var mult = 2;
+        var suma = 0;
+
+        largo = largo - 2;
+
+        while (largo >= 0) {
+            suma = suma + (rut.charAt(largo) * mult);
+            if (mult > 6)
+                mult = 2;
+            else
+                mult = mult + 1;
+            largo = largo - 1;
+        }
+
+        var resto = suma % 11;
+        var digito = 11 - resto;
+
+        if (digito == 10)
+            digito = "K";
+        else if (digito == 11)
+            digito = 0;
+
+        if (digito != dv.toUpperCase()) {
+            alert(MSG_RUT_INVALIDO);
+            objTxtRut.focus();
+            objTxtRut.select();
+            return false;
+        }
+        else {
+            //return objTxtRut.value
+            return true;
+        }
+    }
+
+</script>

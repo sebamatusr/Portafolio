@@ -1247,14 +1247,14 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>5.56225in</Height>
+    <Height>11.58813cm</Height>
     <Style>
       <Border>
         <Style>Solid</Style>
       </Border>
     </Style>
   </Body>
-  <Width>9.08235in</Width>
+  <Width>20cm</Width>
   <Page>
     <PageHeader>
       <Height>2.69557cm</Height>
@@ -1312,8 +1312,8 @@
         </Border>
       </Style>
     </PageHeader>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>8.5in</PageHeight>
+    <PageWidth>11in</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

@@ -1,0 +1,14 @@
+﻿@model PortafolioWeb.SOLICITUD
+@{
+    Layout = null;
+}
+
+<h2>Borrar solicitud</h2>
+@using (Html.BeginForm("Delete", "FuncionarioSolicitud", FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.HiddenFor(a => a.ID_SOLICITUD)
+
+    <div>
+        <input type="submit" value="Borrar solicitud" />
+    </div>
+}

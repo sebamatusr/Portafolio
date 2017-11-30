@@ -12,23 +12,48 @@ namespace PortafolioWeb.Controllers
     {
         Entities db = new Entities();
         SolicitudViewModel model = new SolicitudViewModel();
-        
+
 
         // GET: JefeSuperior
         public ActionResult Index()
         {
-            return View();
+            if (Session["rol_name"].Equals("Jefe Unidad Superior"))
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
         public ActionResult ResolucionForm()
         {
-            model.Unidades = db.UNIDAD.ToList();
-            return View(model);
+            
+            if (Session["rol_name"].Equals("Jefe Unidad Superior"))
+            {
+                model.Unidades = db.UNIDAD.ToList();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
         [HttpPost]
         public ActionResult ResolucionForm(FormCollection col)
         {
+            int idunidad = 0;
             model.Unidades = db.UNIDAD.ToList();
-            int idunidad = Convert.ToInt32(col["Unidades"]);
+            try
+            {
+                idunidad = Convert.ToInt32(col["Unidades"]);
+            }
+            catch (Exception)
+            {
+                TempData["error"] = "<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>Ha ocurrido un error, verifique que ha seleccionado una unidad.</strong></div>"; 
+                return View(model);
+            }
+           
 
             UNIDAD unidadent = model.Unidades.Where(u => u.ID_UNIDAD == idunidad).FirstOrDefault();
 
@@ -65,7 +90,7 @@ namespace PortafolioWeb.Controllers
                     }
                     if(listasol.Count < 1)
                     {
-                        TempData["GenerarResult"] = "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>No existen solicitudes en el período y unidad seleccionados.</strong></div>";
+                        TempData["GenerarResult"] = "<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>No existen solicitudes en el período y unidad seleccionados.</strong></div>";
                         return View(model);
                     }
                     else
@@ -86,7 +111,7 @@ namespace PortafolioWeb.Controllers
                 }
                 else
                 {
-                    TempData["GenerarResult"] = "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>No existen solicitudes en el período y unidad seleccionados.</strong></div>";
+                    TempData["GenerarResult"] = "<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>No existen solicitudes en el período y unidad seleccionados.</strong></div>";
                     return View(model);
                 }
 
@@ -97,7 +122,14 @@ namespace PortafolioWeb.Controllers
 
         public ActionResult ConsultarResolucion()
         {
-            return View();
+            if (Session["rol_name"].Equals("Jefe Unidad Superior"))
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
         public ActionResult GetResoluciones()
         {
@@ -118,22 +150,47 @@ namespace PortafolioWeb.Controllers
         }
         public ActionResult Resolucion(int id)
         {
-            TempData["id_unidad"] = id.ToString();
-            return View();
+            
+            if (Session["rol_name"].Equals("Jefe Unidad Superior"))
+            {
+                TempData["id_unidad"] = id.ToString();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
         public ActionResult ListarFuncionariosPorUnidad()
         {
-            model.Unidades = db.UNIDAD.ToList();
-            TempData["unidad"] = 0;
-            return View(model);
+            
+            if (Session["rol_name"].Equals("Jefe Unidad Superior"))
+            {
+                model.Unidades = db.UNIDAD.ToList();
+                TempData["unidad"] = 0;
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
         [HttpPost]
         public ActionResult ListarFuncionariosPorUnidad(FormCollection col)
         {
             model.Unidades = db.UNIDAD.ToList();
-            TempData["unidad"] = Convert.ToInt32(col["Unidades"]);
-
-            return View(model);
+            try
+            {
+                TempData["unidad"] = Convert.ToInt32(col["Unidades"]);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                TempData["unidad"] = 0;
+                return View(model);
+            }
+            
+            
         }
         public ActionResult GetFuncionariosPorUnidad(int unidad)
         {
@@ -147,6 +204,55 @@ namespace PortafolioWeb.Controllers
                                     f.EMAIL
                                 }).ToList();
             var json = JsonConvert.SerializeObject(funcionarios, new JsonSerializerSettings() { DateFormatString = "yyyy-MM-dd" });
+            return Content(json, "application/json");
+        }
+        public ActionResult ResumenReport(int id)
+        {
+            
+            if (Session["rol_name"].Equals("Jefe Unidad Superior"))
+            {
+                TempData["id_unidad"] = id.ToString();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+        public ActionResult ResumenCuantitativo()
+        {
+            
+
+            if (Session["rol_name"].Equals("Jefe Unidad Superior"))
+            {
+                model.Unidades = db.UNIDAD.ToList();
+
+                model.Tipos_Solicitud = db.TIPO_SOLICITUD.ToList();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+        public ActionResult GetUnidades()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            var reslinq = (from u in db.UNIDAD
+                           join f in db.FUNCIONARIO on u.ID_UNIDAD equals f.ID_UNIDAD
+                           join r in db.ROL on f.ID_ROL equals r.ID_ROL
+                           where r.NOMBRE_ROL.Equals("Jefe Unidad Interior")
+                           select new
+                           {
+                               u.ID_UNIDAD,
+                               u.NOMBRE_UNIDAD,
+                               NOMBRE_JEFE = f.NOMBRE + " " + f.APELLIDO_PATERNO
+                           }).ToList();
+
+
+            var json = JsonConvert.SerializeObject(reslinq, new JsonSerializerSettings() { DateFormatString = "yyyy-MM-dd" });
+
             return Content(json, "application/json");
         }
     }

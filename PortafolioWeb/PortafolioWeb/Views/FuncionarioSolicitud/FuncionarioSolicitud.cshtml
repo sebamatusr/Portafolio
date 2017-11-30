@@ -48,7 +48,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        @Html.TextBoxFor(model => model.solicitud.FECHA_INICIO, new {@placeholder = "Seleccione una fecha", @class = "form-control datepicker", @id = "datepicker" })
+                        @Html.TextBoxFor(model => model.solicitud.FECHA_INICIO, new { @required = "true", @placeholder = "Seleccione una fecha", @class = "form-control datepicker", @id = "datepicker" })
                         @Html.ValidationMessageFor(model => model.solicitud.FECHA_INICIO, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        @Html.TextBoxFor(model => model.solicitud.FECHA_FIN, new { @placeholder = "Seleccione una fecha", @class = "form-control datepicker", @id = "datepicker2" })
+                        @Html.TextBoxFor(model => model.solicitud.FECHA_FIN, new { @required = "true", @placeholder = "Seleccione una fecha", @class = "form-control datepicker", @id = "datepicker2" })
                         @Html.ValidationMessageFor(model => model.solicitud.FECHA_FIN, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -81,10 +81,13 @@
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4" align="center">
                     <button type="submit" id="boton" class="btn btn-primary btn-sm">Ingresar solicitud</button>
-                    @TempData["SuccessInsert"]
+                    
                 </div>
             </div>
-
+            <div align="center">
+                @Html.Raw(TempData["SuccessInsert"])
+                @Html.Raw(TempData["Error"])
+            </div>
         </fieldset>
     </form>
 </div>
@@ -123,7 +126,8 @@
               e.preventDefault();
           });
 
-          $(".datepicker").datepicker({      
+          $(".datepicker").datepicker({
+              minDate: 0,
               onSelect: function(dateText, inst){
                   $("#datepicker2").datepicker("option","minDate",
                   $("#datepicker").datepicker("getDate"));

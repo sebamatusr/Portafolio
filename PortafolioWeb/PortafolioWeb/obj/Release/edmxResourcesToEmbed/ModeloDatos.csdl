@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ESTADO">
+    <Key>
+      <PropertyRef Name="ID_ESTADO" />
+    </Key>
+    <Property Name="ID_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ESTADO1" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.SOLICITUD_ESTADO_FK" FromRole="ESTADO" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="FUNCIONARIO">
+    <Key>
+      <PropertyRef Name="RUT" />
+    </Key>
+    <Property Name="RUT" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDO_PATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDO_MATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TELEFONO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="6" Nullable="false" />
+    <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="6" Nullable="false" />
+    <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_UNIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="ROL" Relationship="Self.FUNCIONARIO_ROL_FK" FromRole="FUNCIONARIO" ToRole="ROL" />
+    <NavigationProperty Name="HISTORIAL_RESOLUCIONES" Relationship="Self.HISTORIAL_FUNCIONARIO_FK" FromRole="FUNCIONARIO" ToRole="HISTORIAL_RESOLUCIONES" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.SOLICITUD_FUNCIONARIO_FK" FromRole="FUNCIONARIO" ToRole="SOLICITUD" />
+    <NavigationProperty Name="SOLICITUD1" Relationship="Self.SOLICITUD_FUNCIONARIO_FKV2" FromRole="FUNCIONARIO" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="HISTORIAL_RESOLUCIONES">
+    <Key>
+      <PropertyRef Name="ID_RESOLUCION" />
+    </Key>
+    <Property Name="ID_RESOLUCION" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHA_EMISION" Type="DateTime" Precision="6" Nullable="false" />
+    <Property Name="RUT_EMISOR" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="FUNCIONARIO" Relationship="Self.HISTORIAL_FUNCIONARIO_FK" FromRole="HISTORIAL_RESOLUCIONES" ToRole="FUNCIONARIO" />
+    <Property Name="UNIDAD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MOTIVO">
+    <Key>
+      <PropertyRef Name="ID_MOTIVO" />
+    </Key>
+    <Property Name="ID_MOTIVO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_TIPOSOLICITUD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="TIPO_SOLICITUD" Relationship="Self.MOTIVO_TIPO_SOLICITUD_FK" FromRole="MOTIVO" ToRole="TIPO_SOLICITUD" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="ID_ROL" />
+      <PropertyRef Name="ID_UNIDAD" />
+    </Key>
+    <Property Name="ID_ROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_ROL" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_ROL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_UNIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FUNCIONARIO_ROL_FK" FromRole="ROL" ToRole="FUNCIONARIO" />
+    <NavigationProperty Name="UNIDAD" Relationship="Self.ROL_UNIDAD_FK" FromRole="ROL" ToRole="UNIDAD" />
+  </EntityType>
+  <EntityType Name="SOLICITUD">
+    <Key>
+      <PropertyRef Name="ID_SOLICITUD" />
+    </Key>
+    <Property Name="ID_SOLICITUD" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CODIGO_VERIFICACION" Type="String" Nullable="false" />
+    <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" />
+    <Property Name="FECHA_FIN" Type="DateTime" Nullable="false" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="6" Nullable="false" />
+    <Property Name="FECHA_MODIFICACION" Type="DateTime" Precision="6" Nullable="false" />
+    <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_TIPOSOLICITUD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ID_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="RUT_FUNCIONARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RUT_EVALUADOR" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ESTADO1" Relationship="Self.SOLICITUD_ESTADO_FK" FromRole="SOLICITUD" ToRole="ESTADO" />
+    <NavigationProperty Name="FUNCIONARIO" Relationship="Self.SOLICITUD_FUNCIONARIO_FK" FromRole="SOLICITUD" ToRole="FUNCIONARIO" />
+    <NavigationProperty Name="FUNCIONARIO1" Relationship="Self.SOLICITUD_FUNCIONARIO_FKV2" FromRole="SOLICITUD" ToRole="FUNCIONARIO" />
+    <NavigationProperty Name="TIPO_SOLICITUD" Relationship="Self.SOLICITUD_TIPO_SOLICITUD_FK" FromRole="SOLICITUD" ToRole="TIPO_SOLICITUD" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TIPO_SOLICITUD">
+    <Key>
+      <PropertyRef Name="ID_TIPOSOLICITUD" />
+    </Key>
+    <Property Name="ID_TIPOSOLICITUD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CANTIDAD_DIAS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="6" Nullable="false" />
+    <Property Name="FECHA_MODIFACION" Type="DateTime" Precision="6" Nullable="false" />
+    <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="MOTIVO" Relationship="Self.MOTIVO_TIPO_SOLICITUD_FK" FromRole="TIPO_SOLICITUD" ToRole="MOTIVO" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.SOLICITUD_TIPO_SOLICITUD_FK" FromRole="TIPO_SOLICITUD" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="UNIDAD">
+    <Key>
+      <PropertyRef Name="ID_UNIDAD" />
+    </Key>
+    <Property Name="ID_UNIDAD" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_UNIDAD" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="ROL" Relationship="Self.ROL_UNIDAD_FK" FromRole="UNIDAD" ToRole="ROL" />
+  </EntityType>
+  <Association Name="SOLICITUD_ESTADO_FK">
+    <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO">
+        <PropertyRef Name="ID_ESTADO" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="ID_ESTADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FUNCIONARIO_ROL_FK">
+    <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROL">
+        <PropertyRef Name="ID_ROL" />
+        <PropertyRef Name="ID_UNIDAD" />
+      </Principal>
+      <Dependent Role="FUNCIONARIO">
+        <PropertyRef Name="ID_ROL" />
+        <PropertyRef Name="ID_UNIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HISTORIAL_FUNCIONARIO_FK">
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
+    <End Role="HISTORIAL_RESOLUCIONES" Type="Self.HISTORIAL_RESOLUCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FUNCIONARIO">
+        <PropertyRef Name="RUT" />
+      </Principal>
+      <Dependent Role="HISTORIAL_RESOLUCIONES">
+        <PropertyRef Name="RUT_EMISOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SOLICITUD_FUNCIONARIO_FK">
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FUNCIONARIO">
+        <PropertyRef Name="RUT" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="RUT_FUNCIONARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SOLICITUD_FUNCIONARIO_FKV2">
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FUNCIONARIO">
+        <PropertyRef Name="RUT" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="RUT_EVALUADOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MOTIVO_TIPO_SOLICITUD_FK">
+    <End Role="TIPO_SOLICITUD" Type="Self.TIPO_SOLICITUD" Multiplicity="1" />
+    <End Role="MOTIVO" Type="Self.MOTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_SOLICITUD">
+        <PropertyRef Name="ID_TIPOSOLICITUD" />
+      </Principal>
+      <Dependent Role="MOTIVO">
+        <PropertyRef Name="ID_TIPOSOLICITUD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROL_UNIDAD_FK">
+    <End Role="UNIDAD" Type="Self.UNIDAD" Multiplicity="1" />
+    <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UNIDAD">
+        <PropertyRef Name="ID_UNIDAD" />
+      </Principal>
+      <Dependent Role="ROL">
+        <PropertyRef Name="ID_UNIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SOLICITUD_TIPO_SOLICITUD_FK">
+    <End Role="TIPO_SOLICITUD" Type="Self.TIPO_SOLICITUD" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_SOLICITUD">
+        <PropertyRef Name="ID_TIPOSOLICITUD" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="ID_TIPOSOLICITUD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ESTADO" EntityType="Self.ESTADO" />
+    <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" />
+    <EntitySet Name="HISTORIAL_RESOLUCIONES" EntityType="Self.HISTORIAL_RESOLUCIONES" />
+    <EntitySet Name="MOTIVO" EntityType="Self.MOTIVO" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" />
+    <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" />
+    <EntitySet Name="TIPO_SOLICITUD" EntityType="Self.TIPO_SOLICITUD" />
+    <EntitySet Name="UNIDAD" EntityType="Self.UNIDAD" />
+    <AssociationSet Name="SOLICITUD_ESTADO_FK" Association="Self.SOLICITUD_ESTADO_FK">
+      <End Role="ESTADO" EntitySet="ESTADO" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FUNCIONARIO_ROL_FK" Association="Self.FUNCIONARIO_ROL_FK">
+      <End Role="ROL" EntitySet="ROL" />
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="HISTORIAL_FUNCIONARIO_FK" Association="Self.HISTORIAL_FUNCIONARIO_FK">
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+      <End Role="HISTORIAL_RESOLUCIONES" EntitySet="HISTORIAL_RESOLUCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="SOLICITUD_FUNCIONARIO_FK" Association="Self.SOLICITUD_FUNCIONARIO_FK">
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="SOLICITUD_FUNCIONARIO_FKV2" Association="Self.SOLICITUD_FUNCIONARIO_FKV2">
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="MOTIVO_TIPO_SOLICITUD_FK" Association="Self.MOTIVO_TIPO_SOLICITUD_FK">
+      <End Role="TIPO_SOLICITUD" EntitySet="TIPO_SOLICITUD" />
+      <End Role="MOTIVO" EntitySet="MOTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="ROL_UNIDAD_FK" Association="Self.ROL_UNIDAD_FK">
+      <End Role="UNIDAD" EntitySet="UNIDAD" />
+      <End Role="ROL" EntitySet="ROL" />
+    </AssociationSet>
+    <AssociationSet Name="SOLICITUD_TIPO_SOLICITUD_FK" Association="Self.SOLICITUD_TIPO_SOLICITUD_FK">
+      <End Role="TIPO_SOLICITUD" EntitySet="TIPO_SOLICITUD" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <FunctionImport Name="ValidarLogin">
+      <Parameter Name="VRUT" Mode="In" Type="String" />
+      <Parameter Name="VPASS" Mode="In" Type="String" />
+      <Parameter Name="VSALIDA" Mode="Out" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="LoginValidador">
+      <Parameter Name="VRUT" Mode="In" Type="String" />
+      <Parameter Name="VPASS" Mode="In" Type="String" />
+      <Parameter Name="VSALIDA" Mode="Out" Type="Decimal" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

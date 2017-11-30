@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "VerificarPermiso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">I.Municipalidad Vista Hermosa</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active">@Html.ActionLink("Inicio", "Index", "Alcalde")</li>
+            <li class="active">@Html.ActionLink("Consultar Situación Funcionarios", "ConsultarFuncionarios", "Alcalde")</li>
+            <li class="active">@Html.ActionLink("Consultar Resoluciones Mensuales", "ConsultarResoluciones", "Alcalde")</li>
+            <li class="active">@Html.ActionLink("Verificar Permiso", "VerificarPermiso", "Alcalde")</li>
+            <li class="active">@Html.ActionLink("Resumen Cuantitativo", "ResumenCuantitativo", "Alcalde")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Cerrar Sesión", "EndSession", "Login")</li>
+        </ul>
+    </div>
+</nav>
+<br />
+<div class="container">
+
+    <form class="well form-horizontal" method="post">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Verificación de permiso</legend>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Código de verificación</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                        @Html.TextBox("codigo", null, new { @placeholder = "qkkjs72j-098e-4173-8c8x-f8s15c24e5fd", @class = "form-control", @id = "codigo", @required = "true" })
+                    </div>
+                </div>
+            </div>
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4" align="center">
+                    <button type="submit" id="boton" class="btn btn-primary btn-sm">Verificar solicitud</button>
+                </div>
+            </div>
+            <div align="center">
+                @Html.Raw(TempData["SuccessInsert"])
+            </div>
+          
+
+        </fieldset>
+    </form>
+</div>

@@ -16,11 +16,19 @@ namespace PortafolioWeb.Controllers
         // GET: FuncionarioSolicitud
         public ActionResult Index()
         {
-            if (!Session["rol_name"].Equals("Funcionario"))
+            try
+            {
+                if (!Session["rol_name"].Equals("Funcionario"))
+                {
+                    
+                }
+                return View();
+            }
+            catch (Exception)
             {
                 return RedirectToAction("Index", "Login");
             }
-            return View();
+            
         }
         public ActionResult FuncionarioSolicitud()
         {
@@ -46,8 +54,8 @@ namespace PortafolioWeb.Controllers
             }
 
         }
-        public ActionResult GetMotivos(int id_tiposolicitud)
-        {
+        public ActionResult GetMotivos(int? id_tiposolicitud)
+        { 
             db.Configuration.LazyLoadingEnabled = false;
             var motivos = db.MOTIVO.Where(c => c.ID_TIPOSOLICITUD == id_tiposolicitud).ToList();
 
@@ -65,18 +73,27 @@ namespace PortafolioWeb.Controllers
 
             foreach (var item in dates)
             {
-                if (webservice.GetAsistencia(rut, item))
+                try
                 {
-                    return item;
+                    if (webservice.GetAsistencia(rut, item))
+                    {
+                        return item;
+                    }
                 }
+                catch (Exception)
+                {
+                    TempData["error"] = "<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>Error de conexión a la base de datos</strong></div>";
+                    RedirectToAction("Index","Login");
+                }
+                
             }
             return fin.AddDays(1);
             //return (fin.AddDays(1) - inicio).Days;
         }
 
-        public JsonResult GetPermisos(int id_tiposolicitud, string rut)
+        public JsonResult GetPermisos(int? id_tiposolicitud, string rut)
         {
-            if (id_tiposolicitud <= 0)
+            if (id_tiposolicitud <= 0 || id_tiposolicitud == null )
             {
                 return Json(0, JsonRequestBehavior.AllowGet);
             }
@@ -147,9 +164,21 @@ namespace PortafolioWeb.Controllers
         {
             db.Configuration.LazyLoadingEnabled = false;
             SolicitudViewModel model = new SolicitudViewModel();
-            var solicitudes = db.SOLICITUD.Where(c => c.RUT_FUNCIONARIO.Equals(rut)).ToList();
+            var solicitudes = (from s in db.SOLICITUD
+                           join t in db.TIPO_SOLICITUD on s.ID_TIPOSOLICITUD equals t.ID_TIPOSOLICITUD
+                           where s.RUT_FUNCIONARIO == rut && s.ESTADO == 1
+                           select new {
+                               s.ID_SOLICITUD,
+                               s.FECHA_INICIO,
+                               s.FECHA_FIN, 
+                               s.ID_ESTADO,
+                               s.FECHA_CREACION,
+                               s.DESCRIPCION,
+                               TIPOSOL = t.DESCRIPCION
+                           }).ToList();
+            //var solicitudes = db.SOLICITUD.Where(c => c.RUT_FUNCIONARIO.Equals(rut)).ToList();
             object jsonO = new { data = solicitudes };
-            var json = JsonConvert.SerializeObject(solicitudes, new JsonSerializerSettings() { DateFormatString = "yyyy-MM-dd" });
+            var json = JsonConvert.SerializeObject(solicitudes, new JsonSerializerSettings() { DateFormatString = "dd-MM-yyyy" });
             //JObject jsonObj = JObject.Parse(json);
 
             return Content(json, "application/json");
@@ -165,9 +194,13 @@ namespace PortafolioWeb.Controllers
         [HttpPost]
         public ActionResult FuncionarioSolicitud(FormCollection collection)
         {
+            SolicitudViewModel model = new SolicitudViewModel();
+            model.Solicitudes = db.SOLICITUD.ToList();
+            model.Tipos_Solicitud = db.TIPO_SOLICITUD.ToList();
+            model.Motivos = db.MOTIVO.ToList();
             try
             {
-                SolicitudViewModel model = new SolicitudViewModel();
+                
 
                 // TODO: Add insert logic here
                 string guid = Guid.NewGuid().ToString();
@@ -200,9 +233,7 @@ namespace PortafolioWeb.Controllers
 
 
 
-                model.Solicitudes = db.SOLICITUD.ToList();
-                model.Tipos_Solicitud = db.TIPO_SOLICITUD.ToList();
-                model.Motivos = db.MOTIVO.ToList();
+                
 
                 db.Configuration.AutoDetectChangesEnabled = true;
                 db.SOLICITUD.Add(solicitud);
@@ -213,10 +244,10 @@ namespace PortafolioWeb.Controllers
                 return View(model);
 
             }
-            catch(Exception ex)
+            catch(Exception)
             {
-                string msgEx = ex.Message;
-                return RedirectToAction("Index");
+                TempData["error"] = "<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>Ha ocurrido un error, verifique que ha seleccionado una unidad.</strong></div>";
+                return View(model);
             }
         }
 
@@ -315,13 +346,14 @@ namespace PortafolioWeb.Controllers
                 using (db)
                 {
                     var permiso = db.SOLICITUD.Where(a => a.ID_SOLICITUD == id).FirstOrDefault();
+                    
 
                     if (permiso != null)
                     {
-                        if (permiso.ESTADO1.DESCRIPCION.Equals("Pendiente"))
+                        permiso.ESTADO1 = db.ESTADO.Where(e => e.ID_ESTADO == permiso.ID_ESTADO).FirstOrDefault();
+                        if (permiso.ESTADO1.DESCRIPCION.Equals("Solicitado"))
                         {
                             permiso.ESTADO = 0;
-                            permiso.ESTADO1 = db.ESTADO.Where(e => e.ID_ESTADO == permiso.ID_ESTADO).FirstOrDefault();
                             db.Configuration.AutoDetectChangesEnabled = true;
                             db.ChangeTracker.HasChanges();
                             db.SaveChanges();
